@@ -35,6 +35,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO.Ports;
+using System.ComponentModel;
+using System.Threading;
 
 namespace COMDBG
 {
@@ -61,10 +63,18 @@ namespace COMDBG
         /// <param name="e"></param>
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (sp.BytesToRead > 0)
+            while (sp.IsOpen && sp.BytesToRead > 0)
             {
+                string str = "";
+                try
+                {
+                    str = sp.ReadExisting();
+                }
+                catch (System.Exception)
+                {
+                	//catch read exception
+                }
                 SerialPortEventArgs args = new SerialPortEventArgs();
-                string str = sp.ReadExisting();
                 args.receivedString = str;
                 comReceiveDataEvent.Invoke(this, args);
             }
@@ -118,13 +128,25 @@ namespace COMDBG
         /// </summary>
         public void Close()
         {
+            Thread closeThread = new Thread(new ThreadStart(CloseSpThread));
+            closeThread.Start();
+        }
+
+        private void CloseSpThread()
+        {
             SerialPortEventArgs args = new SerialPortEventArgs();
-            if (sp.IsOpen)
+            args.isOpend = false;
+            try
             {
-                sp.Close();
-                args.isOpend = false;
+                sp.Close(); //close the serial port
             }
+            catch (Exception)
+            {
+                args.isOpend = true;
+            }
+
             comCloseEvent.Invoke(this, args);
         }
+
     }
 }

@@ -250,7 +250,7 @@
             // 
             // TxTbx
             // 
-            this.TxTbx.Location = new System.Drawing.Point(315, 178);
+            this.TxTbx.Location = new System.Drawing.Point(315, 176);
             this.TxTbx.Name = "TxTbx";
             this.TxTbx.ReadOnly = true;
             this.TxTbx.Size = new System.Drawing.Size(46, 20);
@@ -259,7 +259,7 @@
             // 
             // RxTbx
             // 
-            this.RxTbx.Location = new System.Drawing.Point(315, 130);
+            this.RxTbx.Location = new System.Drawing.Point(315, 127);
             this.RxTbx.Name = "RxTbx";
             this.RxTbx.ReadOnly = true;
             this.RxTbx.Size = new System.Drawing.Size(46, 20);
@@ -332,6 +332,7 @@
             // receivetbx
             // 
             this.receivetbx.BackColor = System.Drawing.SystemColors.InfoText;
+            this.receivetbx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.receivetbx.ForeColor = System.Drawing.SystemColors.Info;
             this.receivetbx.Location = new System.Drawing.Point(7, 33);
             this.receivetbx.Multiline = true;
@@ -340,10 +341,12 @@
             this.receivetbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.receivetbx.Size = new System.Drawing.Size(288, 145);
             this.receivetbx.TabIndex = 9;
+            this.receivetbx.TextChanged += new System.EventHandler(this.receivetbx_TextChanged);
             // 
             // sendtbx
             // 
             this.sendtbx.BackColor = System.Drawing.SystemColors.InfoText;
+            this.sendtbx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sendtbx.ForeColor = System.Drawing.SystemColors.Info;
             this.sendtbx.Location = new System.Drawing.Point(7, 199);
             this.sendtbx.Multiline = true;
@@ -459,7 +462,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(370, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(401, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // statusTimeLabel

@@ -54,7 +54,6 @@ namespace COMDBG
     public partial class MainForm : Form, IView
     {
         private IController controller;
-        private string lastPortName = null;
         private int sendBytesCount = 0;
         private int receiveBytesCount = 0;
 
@@ -67,6 +66,8 @@ namespace COMDBG
             this.statusTimeLabel.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             this.RxTbx.Text = "0";
             this.TxTbx.Text = "0";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         public void SetController(IController controller)
@@ -205,7 +206,6 @@ namespace COMDBG
             if (ArrayComPortsNames.Length == 0)
             {
                 MessageBox.Show("No Serial port Found !");
-                //this.openCloseSpbtn.Enabled = false;
                 return;
             }
             else
@@ -238,7 +238,6 @@ namespace COMDBG
         {
             if (openCloseSpbtn.Text == "Open")
             {
-                lastPortName = comListCbx.Text;
                 controller.OpenSerialPort(comListCbx.Text, baudRateCbx.Text,
                     dataBitsCbx.Text, stopBitsCbx.Text, parityCbx.Text);
             } 
@@ -482,6 +481,17 @@ namespace COMDBG
                 var y = Location.Y + (Height - help.Height) / 2;
                 help.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
             }
+        }
+
+        /// <summary>
+        /// Auto scroll in receive textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void receivetbx_TextChanged(object sender, EventArgs e)
+        {
+            receivetbx.SelectionStart = receivetbx.Text.Length;
+            receivetbx.ScrollToCaret();
         }
     }
 }
