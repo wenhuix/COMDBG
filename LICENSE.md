@@ -1,4 +1,4 @@
-Copyright (c) 2014, Freeway
+Copyright (c) 2014, Wenhuix
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
