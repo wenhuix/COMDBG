@@ -15,7 +15,11 @@ namespace COMDBG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            MainForm view = new MainForm();
+            view.StartPosition = FormStartPosition.CenterScreen;
+            IController controller = new IController(view);
+            
+            Application.Run(view);
         }
     }
 }
