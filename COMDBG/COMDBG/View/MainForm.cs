@@ -291,7 +291,7 @@ namespace COMDBG
         {
             receivetbx.Text = "";
             RxTbx.Text = "0";
-            sendBytesCount = 0;
+            receiveBytesCount = 0;
         }
 
         /// <summary>
