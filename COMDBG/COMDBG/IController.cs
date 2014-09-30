@@ -20,7 +20,48 @@ namespace COMDBG
             comModel.comOpenEvent += new SerialPortEventHandler(view.OpenComEvent);
             comModel.comReceiveDataEvent += new SerialPortEventHandler(view.ComReceiveDataEvent);
         }
+        /// <summary>
+        /// Hex to byte
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        private static byte[] FromHex(string hex)
+        {
+            hex = hex.Replace("-", "");
+            byte[] raw = new byte[hex.Length / 2];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            return raw;
+        }
 
+        /// <summary>
+        /// Hex to string
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        public static String Hex2String(String hex)
+        {
+            byte[] data = FromHex(hex);
+            return Encoding.ASCII.GetString(data);
+        }
+
+        /// <summary>
+        /// String to hex
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static String String2Hex(String str)
+        {
+            Byte[] data = Encoding.Default.GetBytes(str);
+            return BitConverter.ToString(data);
+        }
+
+        /// <summary>
+        /// Send data
+        /// </summary>
+        /// <param name="str"></param>
         public void SendData(String str)
         {
             if (str != null && str != "")

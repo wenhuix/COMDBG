@@ -35,11 +35,11 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(207, 108);
+            this.okButton.Location = new System.Drawing.Point(210, 140);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(61, 35);
+            this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 26;
-            this.okButton.Text = "OK(&O)";
+            this.okButton.Text = "OK";
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // richTextBox1
@@ -50,14 +50,15 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(246, 67);
             this.richTextBox1.TabIndex = 27;
-            this.richTextBox1.Text = "COMDBG 1.0\nBy Wenhuix, please refer to:\nhttps://github.com/wenhuix/COMDBG";
-            this.richTextBox1.LinkClicked +=new System.Windows.Forms.LinkClickedEventHandler(richTextBox1_LinkClicked);
+            this.richTextBox1.Text = "COMDBG 1.0, By Wenhuix, \nMore information please refer to:\nhttps://github.com/wen" +
+    "huix/COMDBG";
+            this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
             // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 154);
+            this.ClientSize = new System.Drawing.Size(294, 172);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

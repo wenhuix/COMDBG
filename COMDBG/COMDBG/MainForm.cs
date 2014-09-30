@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.IO.Ports;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace COMDBG
@@ -24,6 +25,8 @@ namespace COMDBG
         private string lastPortName = null;
         private int sendBytesCount = 0;
         private int receiveBytesCount = 0;
+
+        delegate void ComCallBack(Object model, SerialPortEventArgs e);
 
         public MainForm()
         {
@@ -46,14 +49,24 @@ namespace COMDBG
         /// <param name="e"></param>
         public void OpenComEvent(Object sender, SerialPortEventArgs e)
         {
-            if (e.isOpend)
+            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
             {
-                statuslabel.Text = "Opend";
-                openCloseSpbtn.Text = "Close";
-            } 
+                ComCallBack cb = new ComCallBack(OpenComEvent);
+                this.Invoke(cb, new object[] { sender, e });
+            }
             else
             {
-                statuslabel.Text = "Open failed!";
+                if (e.isOpend)
+                {
+                    statuslabel.Text = "Opend";
+                    openCloseSpbtn.Text = "Close";
+                    sendbtn.Enabled = true;
+                }
+                else
+                {
+                    statuslabel.Text = "Open failed!";
+                    sendbtn.Enabled = false;
+                }
             }
         }
 
@@ -64,10 +77,19 @@ namespace COMDBG
         /// <param name="e"></param>
         public void CloseComEvent(Object sender, SerialPortEventArgs e)
         {
-            if (!e.isOpend)
+            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
             {
-                statuslabel.Text = "Closed";
-                openCloseSpbtn.Text = "Open";
+                ComCallBack cb = new ComCallBack(CloseComEvent);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                if (!e.isOpend)
+                {
+                    statuslabel.Text = "Closed";
+                    openCloseSpbtn.Text = "Open";
+                    sendbtn.Enabled = false;
+                }
             }
         }
 
@@ -78,16 +100,25 @@ namespace COMDBG
         /// <param name="e"></param>
         public void ComReceiveDataEvent(Object sender, SerialPortEventArgs e)
         {
-            if (recStrRadiobtn.Checked)
+            if (this.receivetbx.InvokeRequired || RxTbx.InvokeRequired)
             {
-                receivetbx.Text += e.receivedString;
-            } 
+                ComCallBack cb = new ComCallBack(ComReceiveDataEvent);
+                this.Invoke(cb, new object[] { sender, e });
+            }
             else
             {
-                receivetbx.Text += e.receivedBytes;
+                if (recStrRadiobtn.Checked)
+                {
+                    receivetbx.Text += e.receivedString;
+                }
+                else
+                {
+                    receivetbx.Text += IController.String2Hex(e.receivedString);
+                }
+                receiveBytesCount += e.receivedString.Length;
+                RxTbx.Text = receiveBytesCount.ToString();
             }
-            receiveBytesCount += e.receivedBytes.Length;
-            RxTbx.Text = receiveBytesCount.ToString();
+
         }
 
 
@@ -129,13 +160,11 @@ namespace COMDBG
             //get the first item print in the text
             parityCbx.Text = parityCbx.Items[0].ToString();
 
-            string[] ArrayComPortsNames = null;
-
             //Com Ports
-            ArrayComPortsNames = SerialPort.GetPortNames();
+            string[] ArrayComPortsNames = SerialPort.GetPortNames();
             if (ArrayComPortsNames.Length == 0)
             {
-                MessageBox.Show("No Serial port found！");
+                MessageBox.Show("No Serial port available！");
                 return;
             }
             else
@@ -185,12 +214,20 @@ namespace COMDBG
         /// <param name="e"></param>
         private void sendbtn_Click(object sender, EventArgs e)
         {
-            controller.SendData(sendtbx.Text);
-            if (sendtbx.Text != null)
+            String sendText = sendtbx.Text;
+            if (sendText == null)
             {
-                sendBytesCount += sendtbx.Text.Length;
-                TxTbx.Text = sendBytesCount.ToString();
+                return;
             }
+            //If hex radio checked, should convert to string first
+            if (sendHexRadiobtn.Checked)
+            {
+                sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
+                sendText = IController.Hex2String(sendText);
+            }
+            controller.SendData(sendText);
+            sendBytesCount += sendText.Length;
+            TxTbx.Text = sendBytesCount.ToString();
         }
 
         /// <summary>
@@ -218,11 +255,112 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// Save received data
+        /// String to hex
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void recHexRadiobtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (recHexRadiobtn.Checked)
+            {
+                if (receivetbx.Text == null)
+                {
+                    return;
+                }
+                receivetbx.Text = IController.String2Hex(receivetbx.Text);
+            }
+        }
+
+        /// <summary>
+        /// Hex to string
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void recStrRadiobtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (recStrRadiobtn.Checked)
+            {
+                if (receivetbx.Text == null)
+                {
+                    return;
+                }
+                receivetbx.Text = IController.Hex2String(receivetbx.Text);
+            }
+        }
+
+        /// <summary>
+        /// String to Hex
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sendHexRadiobtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sendHexRadiobtn.Checked)
+            {
+                if (sendtbx.Text == null)
+                {
+                    return;
+                }
+                sendtbx.Text = IController.String2Hex(sendtbx.Text);
+            }
+        }
+
+        /// <summary>
+        /// Hex to string
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sendStrRadiobtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sendStrRadiobtn.Checked)
+            {
+                if (sendtbx.Text == null)
+                {
+                    return;
+                }
+                sendtbx.Text = IController.Hex2String(sendtbx.Text);
+            }
+        }
+
+        /// <summary>
+        /// Filter illegal input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sendtbx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Input Hex
+            if (sendHexRadiobtn.Checked)
+            {
+                e.Handled = true;
+                switch (sendtbx.Text.Length % 3)
+                {
+                case 0:
+                case 1:
+                    if ((e.KeyChar >= 'a' && e.KeyChar <= 'f')
+                        || (e.KeyChar >= 'A' && e.KeyChar <= 'F')
+                        || char.IsDigit(e.KeyChar)
+                        || e.KeyChar == '\b')
+                    {
+                        e.Handled = false;
+                    }
+                	break;
+                case 2:
+                    if (e.KeyChar == '-' || e.KeyChar == '\b')
+                    {
+                        e.Handled = false;
+                    }
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// save received data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void receivedDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -238,11 +376,41 @@ namespace COMDBG
         }
 
         /// <summary>
+        /// save send data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sendDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.Filter = "txt file|*.txt";
+            saveFileDialog.DefaultExt = ".txt";
+            saveFileDialog.FileName = "send.txt";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                String fName = saveFileDialog.FileName;
+                System.IO.File.WriteAllText(fName, sendtbx.Text);
+            }
+        }
+
+        /// <summary>
+        /// Quit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
         /// about me
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void aboutToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AboutForm about = new AboutForm();
             about.StartPosition = FormStartPosition.CenterParent;
@@ -254,7 +422,25 @@ namespace COMDBG
                 var y = Location.Y + (Height - about.Height) / 2;
                 about.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
             }
+        }
 
+        /// <summary>
+        /// Help
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpForm help = new HelpForm();
+            help.StartPosition = FormStartPosition.CenterParent;
+            help.Show();
+
+            if (help.StartPosition == FormStartPosition.CenterParent)
+            {
+                var x = Location.X + (Width - help.Width) / 2;
+                var y = Location.Y + (Height - help.Height) / 2;
+                help.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+            }
         }
     }
 }

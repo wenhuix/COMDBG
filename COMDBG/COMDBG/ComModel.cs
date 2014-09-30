@@ -11,8 +11,7 @@ namespace COMDBG
     public class SerialPortEventArgs : EventArgs
     {
         public bool isOpend = false;
-        public String receivedString = null;
-        public Byte[] receivedBytes = null;
+        public String receivedString = "";
     }
 
     public class ComModel
@@ -35,7 +34,6 @@ namespace COMDBG
                 SerialPortEventArgs args = new SerialPortEventArgs();
                 string str = sp.ReadExisting();
                 args.receivedString = str;
-                args.receivedBytes = Encoding.Default.GetBytes(str);
                 comReceiveDataEvent.Invoke(this, args);
             }
         }

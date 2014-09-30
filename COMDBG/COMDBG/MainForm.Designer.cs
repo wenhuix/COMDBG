@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comListCbx = new System.Windows.Forms.ComboBox();
@@ -59,9 +60,12 @@
             this.sendbtn = new System.Windows.Forms.Button();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.receivedDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statuslabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -77,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 15);
+            this.label1.Location = new System.Drawing.Point(4, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 4;
@@ -86,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 169);
+            this.label2.Location = new System.Drawing.Point(4, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 5;
@@ -94,7 +98,6 @@
             // 
             // comListCbx
             // 
-            this.comListCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comListCbx.FormattingEnabled = true;
             this.comListCbx.Location = new System.Drawing.Point(24, 49);
             this.comListCbx.Name = "comListCbx";
@@ -204,9 +207,9 @@
             this.groupBox1.Controls.Add(this.sendbtn);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(121, 30);
+            this.groupBox1.Location = new System.Drawing.Point(121, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(365, 267);
+            this.groupBox1.Size = new System.Drawing.Size(370, 275);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
@@ -215,7 +218,7 @@
             // 
             this.panel1.Controls.Add(this.recHexRadiobtn);
             this.panel1.Controls.Add(this.recStrRadiobtn);
-            this.panel1.Location = new System.Drawing.Point(111, 9);
+            this.panel1.Location = new System.Drawing.Point(150, 9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(126, 20);
             this.panel1.TabIndex = 20;
@@ -223,69 +226,75 @@
             // recHexRadiobtn
             // 
             this.recHexRadiobtn.AutoSize = true;
-            this.recHexRadiobtn.Location = new System.Drawing.Point(65, 1);
+            this.recHexRadiobtn.Location = new System.Drawing.Point(63, 1);
             this.recHexRadiobtn.Name = "recHexRadiobtn";
             this.recHexRadiobtn.Size = new System.Drawing.Size(41, 16);
             this.recHexRadiobtn.TabIndex = 15;
             this.recHexRadiobtn.TabStop = true;
             this.recHexRadiobtn.Text = "Hex";
             this.recHexRadiobtn.UseVisualStyleBackColor = true;
+            this.recHexRadiobtn.CheckedChanged += new System.EventHandler(this.recHexRadiobtn_CheckedChanged);
             // 
             // recStrRadiobtn
             // 
             this.recStrRadiobtn.AutoSize = true;
-            this.recStrRadiobtn.Location = new System.Drawing.Point(4, 1);
+            this.recStrRadiobtn.Checked = true;
+            this.recStrRadiobtn.Location = new System.Drawing.Point(2, 1);
             this.recStrRadiobtn.Name = "recStrRadiobtn";
             this.recStrRadiobtn.Size = new System.Drawing.Size(59, 16);
             this.recStrRadiobtn.TabIndex = 14;
             this.recStrRadiobtn.TabStop = true;
             this.recStrRadiobtn.Text = "String";
             this.recStrRadiobtn.UseVisualStyleBackColor = true;
+            this.recStrRadiobtn.CheckedChanged += new System.EventHandler(this.recStrRadiobtn_CheckedChanged);
             // 
             // TxTbx
             // 
-            this.TxTbx.Location = new System.Drawing.Point(300, 138);
+            this.TxTbx.Location = new System.Drawing.Point(315, 164);
             this.TxTbx.Name = "TxTbx";
             this.TxTbx.ReadOnly = true;
-            this.TxTbx.Size = new System.Drawing.Size(56, 21);
+            this.TxTbx.Size = new System.Drawing.Size(46, 21);
             this.TxTbx.TabIndex = 19;
             this.TxTbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // RxTbx
             // 
-            this.RxTbx.Location = new System.Drawing.Point(300, 116);
+            this.RxTbx.Location = new System.Drawing.Point(315, 120);
             this.RxTbx.Name = "RxTbx";
             this.RxTbx.ReadOnly = true;
-            this.RxTbx.Size = new System.Drawing.Size(56, 21);
+            this.RxTbx.Size = new System.Drawing.Size(46, 21);
             this.RxTbx.TabIndex = 18;
             this.RxTbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // sendHexRadiobtn
             // 
             this.sendHexRadiobtn.AutoSize = true;
-            this.sendHexRadiobtn.Location = new System.Drawing.Point(172, 165);
+            this.sendHexRadiobtn.Location = new System.Drawing.Point(213, 165);
             this.sendHexRadiobtn.Name = "sendHexRadiobtn";
             this.sendHexRadiobtn.Size = new System.Drawing.Size(41, 16);
             this.sendHexRadiobtn.TabIndex = 17;
             this.sendHexRadiobtn.TabStop = true;
             this.sendHexRadiobtn.Text = "Hex";
             this.sendHexRadiobtn.UseVisualStyleBackColor = true;
+            this.sendHexRadiobtn.CheckedChanged += new System.EventHandler(this.sendHexRadiobtn_CheckedChanged);
             // 
             // sendStrRadiobtn
             // 
             this.sendStrRadiobtn.AutoSize = true;
-            this.sendStrRadiobtn.Location = new System.Drawing.Point(111, 165);
+            this.sendStrRadiobtn.Checked = true;
+            this.sendStrRadiobtn.Location = new System.Drawing.Point(152, 165);
             this.sendStrRadiobtn.Name = "sendStrRadiobtn";
             this.sendStrRadiobtn.Size = new System.Drawing.Size(59, 16);
             this.sendStrRadiobtn.TabIndex = 16;
             this.sendStrRadiobtn.TabStop = true;
             this.sendStrRadiobtn.Text = "String";
             this.sendStrRadiobtn.UseVisualStyleBackColor = true;
+            this.sendStrRadiobtn.CheckedChanged += new System.EventHandler(this.sendStrRadiobtn_CheckedChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(276, 142);
+            this.label9.Location = new System.Drawing.Point(301, 147);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(23, 12);
             this.label9.TabIndex = 13;
@@ -294,7 +303,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(276, 120);
+            this.label8.Location = new System.Drawing.Point(301, 102);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(23, 12);
             this.label8.TabIndex = 12;
@@ -302,7 +311,7 @@
             // 
             // clearReceivebtn
             // 
-            this.clearReceivebtn.Location = new System.Drawing.Point(288, 30);
+            this.clearReceivebtn.Location = new System.Drawing.Point(303, 30);
             this.clearReceivebtn.Name = "clearReceivebtn";
             this.clearReceivebtn.Size = new System.Drawing.Size(58, 31);
             this.clearReceivebtn.TabIndex = 11;
@@ -312,7 +321,7 @@
             // 
             // clearSendbtn
             // 
-            this.clearSendbtn.Location = new System.Drawing.Point(288, 184);
+            this.clearSendbtn.Location = new System.Drawing.Point(303, 197);
             this.clearSendbtn.Name = "clearSendbtn";
             this.clearSendbtn.Size = new System.Drawing.Size(58, 32);
             this.clearSendbtn.TabIndex = 10;
@@ -324,26 +333,30 @@
             // 
             this.receivetbx.BackColor = System.Drawing.SystemColors.InfoText;
             this.receivetbx.ForeColor = System.Drawing.SystemColors.Info;
-            this.receivetbx.Location = new System.Drawing.Point(13, 30);
+            this.receivetbx.Location = new System.Drawing.Point(7, 30);
             this.receivetbx.Multiline = true;
             this.receivetbx.Name = "receivetbx";
             this.receivetbx.ReadOnly = true;
-            this.receivetbx.Size = new System.Drawing.Size(252, 125);
+            this.receivetbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.receivetbx.Size = new System.Drawing.Size(288, 134);
             this.receivetbx.TabIndex = 9;
             // 
             // sendtbx
             // 
             this.sendtbx.BackColor = System.Drawing.SystemColors.InfoText;
             this.sendtbx.ForeColor = System.Drawing.SystemColors.Info;
-            this.sendtbx.Location = new System.Drawing.Point(13, 184);
+            this.sendtbx.Location = new System.Drawing.Point(7, 184);
             this.sendtbx.Multiline = true;
             this.sendtbx.Name = "sendtbx";
-            this.sendtbx.Size = new System.Drawing.Size(252, 69);
+            this.sendtbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.sendtbx.Size = new System.Drawing.Size(288, 83);
             this.sendtbx.TabIndex = 8;
+            this.sendtbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtbx_KeyPress);
             // 
             // sendbtn
             // 
-            this.sendbtn.Location = new System.Drawing.Point(288, 220);
+            this.sendbtn.Enabled = false;
+            this.sendbtn.Location = new System.Drawing.Point(303, 235);
             this.sendbtn.Name = "sendbtn";
             this.sendbtn.Size = new System.Drawing.Size(58, 32);
             this.sendbtn.TabIndex = 7;
@@ -355,7 +368,6 @@
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.aboutToolStripMenuItem2,
             this.quitToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
@@ -363,35 +375,61 @@
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.receivedDataToolStripMenuItem,
+            this.sendDataToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem.Text = "Save...";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
             // 
-            // aboutToolStripMenuItem2
+            // receivedDataToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem2.Name = "aboutToolStripMenuItem2";
-            this.aboutToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem2.Text = "About";
-            this.aboutToolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem2_Click);
+            this.receivedDataToolStripMenuItem.Name = "receivedDataToolStripMenuItem";
+            this.receivedDataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.receivedDataToolStripMenuItem.Text = "Received Data";
+            this.receivedDataToolStripMenuItem.Click += new System.EventHandler(this.receivedDataToolStripMenuItem_Click);
+            // 
+            // sendDataToolStripMenuItem
+            // 
+            this.sendDataToolStripMenuItem.Name = "sendDataToolStripMenuItem";
+            this.sendDataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.sendDataToolStripMenuItem.Text = "Send Data";
+            this.sendDataToolStripMenuItem.Click += new System.EventHandler(this.sendDataToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.aboutToolStripMenuItem1,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.menuStrip1.Size = new System.Drawing.Size(495, 25);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(55, 21);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -454,9 +492,10 @@
             this.Controls.Add(this.comListCbx);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Serial port debug assistant";
+            this.Text = "COMDBG";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -500,7 +539,6 @@
         private System.Windows.Forms.TextBox TxTbx;
         private System.Windows.Forms.TextBox RxTbx;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -511,6 +549,10 @@
         private System.Windows.Forms.ToolStripStatusLabel statusTimeLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer statustimer;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receivedDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sendDataToolStripMenuItem;
     }
 }
 
