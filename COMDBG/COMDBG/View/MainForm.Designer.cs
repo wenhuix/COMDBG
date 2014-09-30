@@ -379,27 +379,27 @@
             this.receivedDataToolStripMenuItem,
             this.sendDataToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // receivedDataToolStripMenuItem
             // 
             this.receivedDataToolStripMenuItem.Name = "receivedDataToolStripMenuItem";
-            this.receivedDataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.receivedDataToolStripMenuItem.Text = "Received Data";
+            this.receivedDataToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.receivedDataToolStripMenuItem.Text = "Received Data...";
             this.receivedDataToolStripMenuItem.Click += new System.EventHandler(this.receivedDataToolStripMenuItem_Click);
             // 
             // sendDataToolStripMenuItem
             // 
             this.sendDataToolStripMenuItem.Name = "sendDataToolStripMenuItem";
-            this.sendDataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.sendDataToolStripMenuItem.Text = "Send Data";
+            this.sendDataToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.sendDataToolStripMenuItem.Text = "Send Data...";
             this.sendDataToolStripMenuItem.Click += new System.EventHandler(this.sendDataToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
