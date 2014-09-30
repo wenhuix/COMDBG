@@ -96,7 +96,7 @@ namespace COMDBG
                 }
                 else
                 {
-                    statuslabel.Text = "Open failed!";
+                    statuslabel.Text = "Open failed !";
                     sendbtn.Enabled = false;
                 }
             }
@@ -145,7 +145,15 @@ namespace COMDBG
                 }
                 else
                 {
-                    receivetbx.Text += IController.String2Hex(e.receivedString);
+                    if (receivetbx.Text.Length > 0)
+                    {
+                        receivetbx.Text += "-" + IController.String2Hex(e.receivedString);
+                    }
+                    else
+                    {
+                        receivetbx.Text += IController.String2Hex(e.receivedString);
+                    }
+                    
                 }
                 receiveBytesCount += e.receivedString.Length;
                 RxTbx.Text = receiveBytesCount.ToString();
@@ -196,7 +204,8 @@ namespace COMDBG
             string[] ArrayComPortsNames = SerialPort.GetPortNames();
             if (ArrayComPortsNames.Length == 0)
             {
-                MessageBox.Show("No Serial port available！");
+                MessageBox.Show("No Serial port Found !");
+                //this.openCloseSpbtn.Enabled = false;
                 return;
             }
             else

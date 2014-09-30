@@ -106,7 +106,7 @@ namespace COMDBG
                 sp.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
                 args.isOpend = true;
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 args.isOpend = false;
             }
