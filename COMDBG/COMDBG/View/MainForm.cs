@@ -76,110 +76,6 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// update status bar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void OpenComEvent(Object sender, SerialPortEventArgs e)
-        {
-            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
-            {
-                ComCallBack cb = new ComCallBack(OpenComEvent);
-                this.Invoke(cb, new object[] { sender, e });
-            }
-            else
-            {
-                if (e.isOpend)
-                {
-                    statuslabel.Text = "Opend";
-                    openCloseSpbtn.Text = "Close";
-                    sendbtn.Enabled = true;
-                    autoSendcbx.Enabled = true;
-                    if (autoSendcbx.Checked)
-                    {
-                        autoSendtimer.Start();
-                    }
-                }
-                else
-                {
-                    statuslabel.Text = "Open failed !";
-                    sendbtn.Enabled = false;
-                    autoSendcbx.Enabled = false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// update status bar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void CloseComEvent(Object sender, SerialPortEventArgs e)
-        {
-            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
-            {
-                ComCallBack cb = new ComCallBack(CloseComEvent);
-                this.Invoke(cb, new object[] { sender, e });
-            }
-            else
-            {
-                if (!e.isOpend)
-                {
-                    statuslabel.Text = "Closed";
-                    openCloseSpbtn.Text = "Open";
-                    sendbtn.Enabled = false;
-                    autoSendcbx.Enabled = false;
-                    autoSendtimer.Stop();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Display received data
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ComReceiveDataEvent(Object sender, SerialPortEventArgs e)
-        {
-            if (this.receivetbx.InvokeRequired)
-            {
-                ComCallBack cb = new ComCallBack(ComReceiveDataEvent);
-                try
-                {
-                    this.Invoke(cb, new object[] { sender, e });
-                }
-                catch (System.Exception)
-                {
-                	//disable form destroy exception
-                }
-                
-            }
-            else
-            {
-                if (recStrRadiobtn.Checked)
-                {
-                    receivetbx.Text += e.receivedString;
-                }
-                else
-                {
-                    if (receivetbx.Text.Length > 0)
-                    {
-                        receivetbx.Text += "-" + IController.String2Hex(e.receivedString);
-                    }
-                    else
-                    {
-                        receivetbx.Text += IController.String2Hex(e.receivedString);
-                    }
-                    
-                }
-                receiveBytesCount += e.receivedString.Length;
-                toolStripStatusRx.Text = "Rx: "+receiveBytesCount.ToString();
-            }
-
-        }
-
-
-        /// <summary>
         /// Initialize serial port infomation
         /// </summary>
         private void InitializeCOMCombox()
@@ -221,8 +117,8 @@ namespace COMDBG
             string[] ArrayComPortsNames = SerialPort.GetPortNames();
             if (ArrayComPortsNames.Length == 0)
             {
-                MessageBox.Show("No Serial port Found !");
-                return;
+                statuslabel.Text = "No COM found !";
+                openCloseSpbtn.Enabled = false;
             }
             else
             {
@@ -231,8 +127,120 @@ namespace COMDBG
                 {
                     comListCbx.Items.Add(ArrayComPortsNames[i]);
                 }
+                comListCbx.Text = ArrayComPortsNames[0];
+                openCloseSpbtn.Enabled = true;
             }
-            comListCbx.Text = ArrayComPortsNames[0];
+        }
+
+        /// <summary>
+        /// update status bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OpenComEvent(Object sender, SerialPortEventArgs e)
+        {
+            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
+            {
+                ComCallBack cb = new ComCallBack(OpenComEvent);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                if (e.isOpend)  //Open successfully
+                {
+                    statuslabel.Text = comListCbx.Text + " Opend";
+                    openCloseSpbtn.Text = "Close";
+                    sendbtn.Enabled = true;
+                    autoSendcbx.Enabled = true;
+                    if (autoSendcbx.Checked)
+                    {
+                        autoSendtimer.Start();
+                    }
+                }
+                else    //Open failed
+                {
+                    statuslabel.Text = "Open failed !";
+                    sendbtn.Enabled = false;
+                    autoSendcbx.Enabled = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// update status bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void CloseComEvent(Object sender, SerialPortEventArgs e)
+        {
+            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
+            {
+                ComCallBack cb = new ComCallBack(CloseComEvent);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                if (!e.isOpend) //close successfully
+                {
+                    statuslabel.Text = comListCbx.Text + " Closed";
+                    openCloseSpbtn.Text = "Open";
+                    sendbtn.Enabled = false;
+                    autoSendcbx.Enabled = false;
+                    autoSendtimer.Stop();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Display received data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void ComReceiveDataEvent(Object sender, SerialPortEventArgs e)
+        {
+            if (this.receivetbx.InvokeRequired)
+            {
+                ComCallBack cb = new ComCallBack(ComReceiveDataEvent);
+                try
+                {
+                    this.Invoke(cb, new object[] { sender, e });
+                }
+                catch (System.Exception)
+                {
+                	//disable form destroy exception
+                }
+                
+            }
+            else
+            {
+                if (recStrRadiobtn.Checked) //display as string
+                {
+                    receivetbx.AppendText(e.receivedString);
+                }
+                else //display as hex
+                {
+                    if (receivetbx.Text.Length > 0)
+                    {
+                        receivetbx.AppendText("-");
+                    }
+                    receivetbx.AppendText(IController.String2Hex(e.receivedString));
+                }
+                //update status bar
+                receiveBytesCount += e.receivedString.Length;
+                toolStripStatusRx.Text = "Rx: "+receiveBytesCount.ToString();
+            }
+
+        }
+
+        /// <summary>
+        /// Auto scroll in receive textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void receivetbx_TextChanged(object sender, EventArgs e)
+        {
+            receivetbx.SelectionStart = receivetbx.Text.Length;
+            receivetbx.ScrollToCaret();
         }
 
         /// <summary>
@@ -264,6 +272,34 @@ namespace COMDBG
         }
 
         /// <summary>
+        /// Refresh soft to find Serial port device
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void refreshbtn_Click(object sender, EventArgs e)
+        {
+            comListCbx.Items.Clear();
+            //Com Ports
+            string[] ArrayComPortsNames = SerialPort.GetPortNames();
+            if (ArrayComPortsNames.Length == 0)
+            {
+                statuslabel.Text = "No COM found !";
+                openCloseSpbtn.Enabled = false;
+            }
+            else
+            {
+                Array.Sort(ArrayComPortsNames);
+                for (int i = 0; i < ArrayComPortsNames.Length; i++)
+                {
+                    comListCbx.Items.Add(ArrayComPortsNames[i]);
+                }
+                comListCbx.Text = ArrayComPortsNames[0];
+                openCloseSpbtn.Enabled = true;
+            }
+            statuslabel.Text = "Refreshed !";
+        }
+
+        /// <summary>
         /// Send data
         /// </summary>
         /// <param name="sender"></param>
@@ -281,6 +317,7 @@ namespace COMDBG
                 sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
                 sendText = IController.Hex2String(sendText);
             }
+            //send data to serial port
             controller.SendDataToCom(sendText);
             sendBytesCount += sendText.Length;
             toolStripStatusTx.Text = "Tx: " + sendBytesCount.ToString();
@@ -385,7 +422,7 @@ namespace COMDBG
         /// <param name="e"></param>
         private void sendtbx_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Input Hex
+            //Input Hex, should like: AF-1B-09
             if (sendHexRadiobtn.Checked)
             {
                 e.Handled = true;
@@ -424,16 +461,19 @@ namespace COMDBG
                 autoSendtimer.Interval = int.Parse(sendtimetbx.Text);
                 autoSendtimer.Start();
 
-                sendtbx.ReadOnly = true;
+                //disable send botton and textbox
                 sendtimetbx.Enabled = false;
+                sendtbx.ReadOnly = true;
                 sendbtn.Enabled = false;
             }
             else
             {
-                autoSendtimer.Stop();
                 autoSendtimer.Enabled = false;
-                sendtbx.ReadOnly = false;
+                autoSendtimer.Stop();
+
+                //enable send botton and textbox
                 sendtimetbx.Enabled = true;
+                sendtbx.ReadOnly = false;
                 sendbtn.Enabled = true;
             }
         }
@@ -548,16 +588,6 @@ namespace COMDBG
             }
         }
 
-        /// <summary>
-        /// Auto scroll in receive textbox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void receivetbx_TextChanged(object sender, EventArgs e)
-        {
-            receivetbx.SelectionStart = receivetbx.Text.Length;
-            receivetbx.ScrollToCaret();
-        }
 
     }
 }
