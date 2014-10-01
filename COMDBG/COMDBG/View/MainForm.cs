@@ -64,8 +64,8 @@ namespace COMDBG
             InitializeComponent();
             InitializeCOMCombox();
             this.statusTimeLabel.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            this.RxTbx.Text = "0";
-            this.TxTbx.Text = "0";
+            this.toolStripStatusTx.Text = "Tx: 0";
+            this.toolStripStatusRx.Text = "Rx: 0";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
@@ -94,11 +94,17 @@ namespace COMDBG
                     statuslabel.Text = "Opend";
                     openCloseSpbtn.Text = "Close";
                     sendbtn.Enabled = true;
+                    autoSendcbx.Enabled = true;
+                    if (autoSendcbx.Checked)
+                    {
+                        autoSendtimer.Start();
+                    }
                 }
                 else
                 {
                     statuslabel.Text = "Open failed !";
                     sendbtn.Enabled = false;
+                    autoSendcbx.Enabled = false;
                 }
             }
         }
@@ -122,6 +128,8 @@ namespace COMDBG
                     statuslabel.Text = "Closed";
                     openCloseSpbtn.Text = "Open";
                     sendbtn.Enabled = false;
+                    autoSendcbx.Enabled = false;
+                    autoSendtimer.Stop();
                 }
             }
         }
@@ -133,10 +141,18 @@ namespace COMDBG
         /// <param name="e"></param>
         public void ComReceiveDataEvent(Object sender, SerialPortEventArgs e)
         {
-            if (this.receivetbx.InvokeRequired || RxTbx.InvokeRequired)
+            if (this.receivetbx.InvokeRequired)
             {
                 ComCallBack cb = new ComCallBack(ComReceiveDataEvent);
-                this.Invoke(cb, new object[] { sender, e });
+                try
+                {
+                    this.Invoke(cb, new object[] { sender, e });
+                }
+                catch (System.Exception)
+                {
+                	//disable form destroy exception
+                }
+                
             }
             else
             {
@@ -157,7 +173,7 @@ namespace COMDBG
                     
                 }
                 receiveBytesCount += e.receivedString.Length;
-                RxTbx.Text = receiveBytesCount.ToString();
+                toolStripStatusRx.Text = "Rx: "+receiveBytesCount.ToString();
             }
 
         }
@@ -265,9 +281,9 @@ namespace COMDBG
                 sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
                 sendText = IController.Hex2String(sendText);
             }
-            controller.SendData(sendText);
+            controller.SendDataToCom(sendText);
             sendBytesCount += sendText.Length;
-            TxTbx.Text = sendBytesCount.ToString();
+            toolStripStatusTx.Text = "Tx: " + sendBytesCount.ToString();
         }
 
         /// <summary>
@@ -278,7 +294,7 @@ namespace COMDBG
         private void clearSendbtn_Click(object sender, EventArgs e)
         {
             sendtbx.Text = "";
-            TxTbx.Text = "0";
+            toolStripStatusTx.Text = "Tx: 0";
             sendBytesCount = 0;
         }
 
@@ -290,7 +306,7 @@ namespace COMDBG
         private void clearReceivebtn_Click(object sender, EventArgs e)
         {
             receivetbx.Text = "";
-            RxTbx.Text = "0";
+            toolStripStatusRx.Text = "Rx: 0";
             receiveBytesCount = 0;
         }
 
@@ -396,6 +412,55 @@ namespace COMDBG
         }
 
         /// <summary>
+        /// Auto send data to serial port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void autoSendcbx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoSendcbx.Checked)
+            {
+                autoSendtimer.Enabled = true;
+                autoSendtimer.Interval = int.Parse(sendtimetbx.Text);
+                autoSendtimer.Start();
+
+                sendtbx.ReadOnly = true;
+                sendtimetbx.Enabled = false;
+                sendbtn.Enabled = false;
+            }
+            else
+            {
+                autoSendtimer.Stop();
+                autoSendtimer.Enabled = false;
+                sendtbx.ReadOnly = false;
+                sendtimetbx.Enabled = true;
+                sendbtn.Enabled = true;
+            }
+        }
+
+        private void autoSendtimer_Tick(object sender, EventArgs e)
+        {
+            sendbtn_Click(sender, e);
+        }
+
+        /// <summary>
+        /// filter illegal input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sendtimetbx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
         /// save received data
         /// </summary>
         /// <param name="sender"></param>
@@ -493,5 +558,6 @@ namespace COMDBG
             receivetbx.SelectionStart = receivetbx.Text.Length;
             receivetbx.ScrollToCaret();
         }
+
     }
 }

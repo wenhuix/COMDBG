@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO.Ports;
+using System.Timers;
 
 namespace COMDBG
 {
@@ -51,6 +52,7 @@ namespace COMDBG
             comModel.comOpenEvent += new SerialPortEventHandler(view.OpenComEvent);
             comModel.comReceiveDataEvent += new SerialPortEventHandler(view.ComReceiveDataEvent);
         }
+
         /// <summary>
         /// Hex to byte
         /// </summary>
@@ -90,10 +92,10 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// Send data
+        /// Send data to serial port
         /// </summary>
         /// <param name="str"></param>
-        public void SendData(String str)
+        public void SendDataToCom(String str)
         {
             if (str != null && str != "")
             {
