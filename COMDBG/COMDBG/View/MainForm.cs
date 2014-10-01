@@ -295,8 +295,9 @@ namespace COMDBG
                 }
                 comListCbx.Text = ArrayComPortsNames[0];
                 openCloseSpbtn.Enabled = true;
+                statuslabel.Text = "OK !";
             }
-            statuslabel.Text = "Refreshed !";
+            
         }
 
         /// <summary>
