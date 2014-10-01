@@ -28,3 +28,7 @@ This tool is C# Serial port debug assistant. It can send and receive data from s
 * 可切换Hex和String显示。
 * 界面简洁，代码开源。
 * 无附加依赖库。
+
+如果觉得还可以，请点个赞 :)
+
+![Alt text](/../screenshot/Screenshot.jpg?raw=true "Screen shot")
