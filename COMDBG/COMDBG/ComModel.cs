@@ -123,6 +123,28 @@ namespace COMDBG
             comOpenEvent.Invoke(this, args);
         }
 
+        //Take care to avoid deadlock when calling Close on the SerialPort 
+        //in response to a GUI event.
+        // An app involving the UI and the SerialPort freezes up when closing the SerialPort
+        // Deadlock can occur if Control.Invoke() is used in serial port event handlers
+
+        //The typical scenario we encounter is occasional deadlock in an app 
+        //that has a data received handler trying to update the GUI at the 
+        //same time the GUI thread is trying to close the SerialPort (for 
+        //example, in response to the user clicking a Close button).
+
+        //The reason deadlock happens is that Close() waits for events to 
+        //finish executing before it closes the port. You can address this 
+        //problem in your apps in two ways:
+
+        //(1)In your event handlers, replace every Control.Invoke call with 
+        //Control.BeginInvoke, which executes asynchronously and avoids 
+        //the deadlock condition. This is commonly used for deadlock avoidance 
+        //when working with GUIs.
+
+        //(2)Call serialPort.Close() on a separate thread. You may prefer this
+        //because this is less invasive than updating your Invoke calls.
+
         /// <summary>
         /// Close serial port
         /// </summary>
