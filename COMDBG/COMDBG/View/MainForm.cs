@@ -315,7 +315,7 @@ namespace COMDBG
             //If hex radio checked, should convert to string first
             if (sendHexRadiobtn.Checked)
             {
-                sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
+                //sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
                 sendText = IController.Hex2String(sendText);
             }
             //send data to serial port
