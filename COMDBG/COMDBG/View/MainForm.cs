@@ -64,8 +64,8 @@ namespace COMDBG
             InitializeComponent();
             InitializeCOMCombox();
             this.statusTimeLabel.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            this.toolStripStatusTx.Text = "Tx: 0";
-            this.toolStripStatusRx.Text = "Rx: 0";
+            this.toolStripStatusTx.Text = "Sent: 0";
+            this.toolStripStatusRx.Text = "Received: 0";
             this.MaximizeBox = false;
             this.MinimizeBox = false;
         }
@@ -227,7 +227,7 @@ namespace COMDBG
                 }
                 //update status bar
                 receiveBytesCount += e.receivedString.Length;
-                toolStripStatusRx.Text = "Rx: "+receiveBytesCount.ToString();
+                toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
             }
 
         }
@@ -320,7 +320,7 @@ namespace COMDBG
             //send data to serial port
             controller.SendDataToCom(sendText);
             sendBytesCount += sendText.Length;
-            toolStripStatusTx.Text = "Tx: " + sendBytesCount.ToString();
+            toolStripStatusTx.Text = "Sent: " + sendBytesCount.ToString();
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace COMDBG
         private void clearSendbtn_Click(object sender, EventArgs e)
         {
             sendtbx.Text = "";
-            toolStripStatusTx.Text = "Tx: 0";
+            toolStripStatusTx.Text = "Sent: 0";
             sendBytesCount = 0;
         }
 
@@ -343,7 +343,7 @@ namespace COMDBG
         private void clearReceivebtn_Click(object sender, EventArgs e)
         {
             receivetbx.Text = "";
-            toolStripStatusRx.Text = "Rx: 0";
+            toolStripStatusRx.Text = "Received: 0";
             receiveBytesCount = 0;
         }
 

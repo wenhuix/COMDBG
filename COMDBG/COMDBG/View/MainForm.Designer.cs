@@ -74,17 +74,19 @@
             this.refreshbtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comListCbx
             // 
             this.comListCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comListCbx.FormattingEnabled = true;
-            this.comListCbx.Location = new System.Drawing.Point(19, 51);
+            this.comListCbx.Location = new System.Drawing.Point(14, 38);
             this.comListCbx.Name = "comListCbx";
             this.comListCbx.Size = new System.Drawing.Size(74, 21);
             this.comListCbx.TabIndex = 7;
@@ -92,16 +94,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 34);
+            this.label3.Location = new System.Drawing.Point(7, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "COM:";
+            this.label3.Text = "Port Name:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 80);
+            this.label4.Location = new System.Drawing.Point(7, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 10;
@@ -110,7 +112,7 @@
             // baudRateCbx
             // 
             this.baudRateCbx.FormattingEnabled = true;
-            this.baudRateCbx.Location = new System.Drawing.Point(19, 98);
+            this.baudRateCbx.Location = new System.Drawing.Point(14, 83);
             this.baudRateCbx.Name = "baudRateCbx";
             this.baudRateCbx.Size = new System.Drawing.Size(74, 21);
             this.baudRateCbx.TabIndex = 9;
@@ -118,7 +120,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 126);
+            this.label5.Location = new System.Drawing.Point(7, 112);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 12;
@@ -127,7 +129,7 @@
             // dataBitsCbx
             // 
             this.dataBitsCbx.FormattingEnabled = true;
-            this.dataBitsCbx.Location = new System.Drawing.Point(19, 145);
+            this.dataBitsCbx.Location = new System.Drawing.Point(14, 128);
             this.dataBitsCbx.Name = "dataBitsCbx";
             this.dataBitsCbx.Size = new System.Drawing.Size(74, 21);
             this.dataBitsCbx.TabIndex = 11;
@@ -135,7 +137,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 172);
+            this.label6.Location = new System.Drawing.Point(7, 157);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 14;
@@ -144,7 +146,7 @@
             // stopBitsCbx
             // 
             this.stopBitsCbx.FormattingEnabled = true;
-            this.stopBitsCbx.Location = new System.Drawing.Point(19, 192);
+            this.stopBitsCbx.Location = new System.Drawing.Point(14, 173);
             this.stopBitsCbx.Name = "stopBitsCbx";
             this.stopBitsCbx.Size = new System.Drawing.Size(74, 21);
             this.stopBitsCbx.TabIndex = 13;
@@ -152,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 218);
+            this.label7.Location = new System.Drawing.Point(7, 202);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 16;
@@ -161,7 +163,7 @@
             // parityCbx
             // 
             this.parityCbx.FormattingEnabled = true;
-            this.parityCbx.Location = new System.Drawing.Point(19, 239);
+            this.parityCbx.Location = new System.Drawing.Point(14, 218);
             this.parityCbx.Name = "parityCbx";
             this.parityCbx.Size = new System.Drawing.Size(74, 21);
             this.parityCbx.TabIndex = 15;
@@ -171,7 +173,7 @@
             this.openCloseSpbtn.Enabled = false;
             this.openCloseSpbtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.openCloseSpbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseSpbtn.Location = new System.Drawing.Point(19, 326);
+            this.openCloseSpbtn.Location = new System.Drawing.Point(14, 293);
             this.openCloseSpbtn.Name = "openCloseSpbtn";
             this.openCloseSpbtn.Size = new System.Drawing.Size(74, 39);
             this.openCloseSpbtn.TabIndex = 17;
@@ -439,7 +441,7 @@
             this.statuslabel.ActiveLinkColor = System.Drawing.SystemColors.ButtonHighlight;
             this.statuslabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statuslabel.Name = "statuslabel";
-            this.statuslabel.Size = new System.Drawing.Size(146, 17);
+            this.statuslabel.Size = new System.Drawing.Size(136, 17);
             this.statuslabel.Spring = true;
             this.statuslabel.Text = "Not Connected";
             this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -453,17 +455,17 @@
             // 
             this.toolStripStatusRx.ActiveLinkColor = System.Drawing.SystemColors.Info;
             this.toolStripStatusRx.Name = "toolStripStatusRx";
-            this.toolStripStatusRx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusRx.Size = new System.Drawing.Size(136, 17);
             this.toolStripStatusRx.Spring = true;
-            this.toolStripStatusRx.Text = "Rx";
+            this.toolStripStatusRx.Text = "Received:";
             this.toolStripStatusRx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusTx
             // 
             this.toolStripStatusTx.Name = "toolStripStatusTx";
-            this.toolStripStatusTx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusTx.Size = new System.Drawing.Size(136, 17);
             this.toolStripStatusTx.Spring = true;
-            this.toolStripStatusTx.Text = "Tx";
+            this.toolStripStatusTx.Text = "Sent:";
             this.toolStripStatusTx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // statusTimeLabel
@@ -484,7 +486,7 @@
             // 
             // refreshbtn
             // 
-            this.refreshbtn.Location = new System.Drawing.Point(19, 274);
+            this.refreshbtn.Location = new System.Drawing.Point(14, 250);
             this.refreshbtn.Name = "refreshbtn";
             this.refreshbtn.Size = new System.Drawing.Size(74, 35);
             this.refreshbtn.TabIndex = 22;
@@ -510,25 +512,35 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Received:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.refreshbtn);
+            this.groupBox2.Controls.Add(this.dataBitsCbx);
+            this.groupBox2.Controls.Add(this.comListCbx);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.openCloseSpbtn);
+            this.groupBox2.Controls.Add(this.baudRateCbx);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.parityCbx);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.stopBitsCbx);
+            this.groupBox2.Location = new System.Drawing.Point(2, 30);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(103, 338);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "COM";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 394);
-            this.Controls.Add(this.refreshbtn);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.openCloseSpbtn);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.parityCbx);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.stopBitsCbx);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.dataBitsCbx);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.baudRateCbx);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.comListCbx);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -543,6 +555,8 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -594,6 +608,7 @@
         private System.Windows.Forms.Button refreshbtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
