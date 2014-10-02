@@ -72,7 +72,7 @@ namespace COMDBG
                 }
                 catch (System.Exception)
                 {
-                	//catch read exception
+                    //catch read exception
                 }
                 SerialPortEventArgs args = new SerialPortEventArgs();
                 args.receivedString = str;

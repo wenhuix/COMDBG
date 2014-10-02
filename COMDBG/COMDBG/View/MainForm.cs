@@ -315,7 +315,6 @@ namespace COMDBG
             //If hex radio checked, should convert to string first
             if (sendHexRadiobtn.Checked)
             {
-                //sendText = sendText.Replace(System.Environment.NewLine, string.Empty);
                 sendText = IController.Hex2String(sendText);
             }
             //send data to serial port
@@ -434,13 +433,14 @@ namespace COMDBG
                     if ((e.KeyChar >= 'a' && e.KeyChar <= 'f')
                         || (e.KeyChar >= 'A' && e.KeyChar <= 'F')
                         || char.IsDigit(e.KeyChar)
-                        || e.KeyChar == '\b')
+                        || (char.IsControl(e.KeyChar) && e.KeyChar != (char)13))
                     {
                         e.Handled = false;
                     }
                 	break;
                 case 2:
-                    if (e.KeyChar == '-' || e.KeyChar == '\b')
+                    if (e.KeyChar == '-'
+                        || (char.IsControl(e.KeyChar) && e.KeyChar != (char)13))
                     {
                         e.Handled = false;
                     }
