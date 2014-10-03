@@ -158,6 +158,7 @@ namespace COMDBG
                     dataBitsCbx.Enabled = false;
                     stopBitsCbx.Enabled = false;
                     parityCbx.Enabled = false;
+                    refreshbtn.Enabled = false;
 
                     if (autoSendcbx.Checked)
                     {
@@ -203,6 +204,7 @@ namespace COMDBG
                     dataBitsCbx.Enabled = true;
                     stopBitsCbx.Enabled = true;
                     parityCbx.Enabled = true;
+                    refreshbtn.Enabled = true;
                 }
             }
         }
