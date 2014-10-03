@@ -72,7 +72,7 @@ namespace COMDBG
                 }
                 catch (System.Exception)
                 {
-                    //catch read exception
+                	//catch read exception
                 }
                 SerialPortEventArgs args = new SerialPortEventArgs();
                 args.receivedString = str;
@@ -108,6 +108,7 @@ namespace COMDBG
             sp.DataBits = Convert.ToInt16(dataBits);
             sp.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits);
             sp.Parity = (Parity)Enum.Parse(typeof(Parity), parity);
+            sp.RtsEnable = true; //Never delete this property
 
             SerialPortEventArgs args = new SerialPortEventArgs();
             try
