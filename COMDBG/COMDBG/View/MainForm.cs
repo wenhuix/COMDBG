@@ -152,9 +152,17 @@ namespace COMDBG
                     openCloseSpbtn.Text = "Close";
                     sendbtn.Enabled = true;
                     autoSendcbx.Enabled = true;
+
+                    comListCbx.Enabled = false;
+                    baudRateCbx.Enabled = false;
+                    dataBitsCbx.Enabled = false;
+                    stopBitsCbx.Enabled = false;
+                    parityCbx.Enabled = false;
+
                     if (autoSendcbx.Checked)
                     {
                         autoSendtimer.Start();
+                        sendtbx.ReadOnly = true;
                     }
                 }
                 else    //Open failed
@@ -184,9 +192,17 @@ namespace COMDBG
                 {
                     statuslabel.Text = comListCbx.Text + " Closed";
                     openCloseSpbtn.Text = "Open";
+
                     sendbtn.Enabled = false;
+                    sendtbx.ReadOnly = false;
                     autoSendcbx.Enabled = false;
                     autoSendtimer.Stop();
+
+                    comListCbx.Enabled = true;
+                    baudRateCbx.Enabled = true;
+                    dataBitsCbx.Enabled = true;
+                    stopBitsCbx.Enabled = true;
+                    parityCbx.Enabled = true;
                 }
             }
         }
