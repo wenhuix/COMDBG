@@ -467,19 +467,19 @@ namespace COMDBG
             }
         }
 
-        //private int lastLength = 0;
-        //private void sendtbx_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (sendHexRadiobtn.Checked && lastLength < sendtbx.TextLength)
-        //    {
-        //        if (sendtbx.TextLength % 3 == 2)
-        //        {
-        //            sendtbx.AppendText("-");
-        //        }
-        //    }
-        //    lastLength = sendtbx.TextLength;
+        private int lastLength = 0;
+        private void sendtbx_TextChanged(object sender, EventArgs e)
+        {
+            if (sendHexRadiobtn.Checked && lastLength < sendtbx.TextLength)
+            {
+                if (sendtbx.TextLength % 3 == 2)
+                {
+                    sendtbx.AppendText("-");
+                }
+            }
+            lastLength = sendtbx.TextLength;
 
-        //}
+        }
 
 
         /// <summary>
