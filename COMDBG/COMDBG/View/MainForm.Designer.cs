@@ -340,7 +340,6 @@
             this.sendtbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.sendtbx.Size = new System.Drawing.Size(329, 75);
             this.sendtbx.TabIndex = 8;
-            this.sendtbx.TextChanged += new System.EventHandler(this.sendtbx_TextChanged);
             this.sendtbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtbx_KeyPress);
             // 
             // sendbtn

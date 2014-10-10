@@ -444,7 +444,8 @@ namespace COMDBG
             if (sendHexRadiobtn.Checked)
             {
                 e.Handled = true;
-                switch (sendtbx.Text.Length % 3)
+                int length = sendtbx.SelectionStart;
+                switch (length % 3)
                 {
                 case 0:
                 case 1:
@@ -455,7 +456,7 @@ namespace COMDBG
                     {
                         e.Handled = false;
                     }
-                	break;
+                    break;
                 case 2:
                     if (e.KeyChar == '-'
                         || (char.IsControl(e.KeyChar) && e.KeyChar != (char)13))
@@ -465,20 +466,6 @@ namespace COMDBG
                     break;
                 }
             }
-        }
-
-        private int lastLength = 0;
-        private void sendtbx_TextChanged(object sender, EventArgs e)
-        {
-            if (sendHexRadiobtn.Checked && lastLength < sendtbx.TextLength)
-            {
-                if (sendtbx.TextLength % 3 == 2)
-                {
-                    sendtbx.AppendText("-");
-                }
-            }
-            lastLength = sendtbx.TextLength;
-
         }
 
 
