@@ -112,11 +112,11 @@ namespace COMDBG
         /// <param name="stopBits"></param>
         /// <param name="parity"></param>
         public void OpenSerialPort(string portName, String baudRate,
-            string dataBits, string stopBits, string parity)
+            string dataBits, string stopBits, string parity, string handshake)
         {
             if (portName != null && portName != "")
             {
-                comModel.Open(portName, baudRate, dataBits, stopBits, parity);
+                comModel.Open(portName, baudRate, dataBits, stopBits, parity, handshake);
             }
         }
 

@@ -75,6 +75,8 @@
             this.autoSendtimer = new System.Windows.Forms.Timer(this.components);
             this.refreshbtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.handshakingcbx = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -103,7 +105,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 62);
+            this.label4.Location = new System.Drawing.Point(7, 60);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 10;
@@ -112,7 +114,7 @@
             // baudRateCbx
             // 
             this.baudRateCbx.FormattingEnabled = true;
-            this.baudRateCbx.Location = new System.Drawing.Point(14, 77);
+            this.baudRateCbx.Location = new System.Drawing.Point(14, 75);
             this.baudRateCbx.Name = "baudRateCbx";
             this.baudRateCbx.Size = new System.Drawing.Size(74, 20);
             this.baudRateCbx.TabIndex = 9;
@@ -120,7 +122,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 103);
+            this.label5.Location = new System.Drawing.Point(7, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 12;
@@ -129,7 +131,7 @@
             // dataBitsCbx
             // 
             this.dataBitsCbx.FormattingEnabled = true;
-            this.dataBitsCbx.Location = new System.Drawing.Point(14, 118);
+            this.dataBitsCbx.Location = new System.Drawing.Point(14, 115);
             this.dataBitsCbx.Name = "dataBitsCbx";
             this.dataBitsCbx.Size = new System.Drawing.Size(74, 20);
             this.dataBitsCbx.TabIndex = 11;
@@ -137,7 +139,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 145);
+            this.label6.Location = new System.Drawing.Point(7, 140);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 14;
@@ -146,7 +148,7 @@
             // stopBitsCbx
             // 
             this.stopBitsCbx.FormattingEnabled = true;
-            this.stopBitsCbx.Location = new System.Drawing.Point(14, 160);
+            this.stopBitsCbx.Location = new System.Drawing.Point(14, 155);
             this.stopBitsCbx.Name = "stopBitsCbx";
             this.stopBitsCbx.Size = new System.Drawing.Size(74, 20);
             this.stopBitsCbx.TabIndex = 13;
@@ -154,7 +156,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 186);
+            this.label7.Location = new System.Drawing.Point(7, 180);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 12);
             this.label7.TabIndex = 16;
@@ -163,7 +165,7 @@
             // parityCbx
             // 
             this.parityCbx.FormattingEnabled = true;
-            this.parityCbx.Location = new System.Drawing.Point(14, 201);
+            this.parityCbx.Location = new System.Drawing.Point(14, 195);
             this.parityCbx.Name = "parityCbx";
             this.parityCbx.Size = new System.Drawing.Size(74, 20);
             this.parityCbx.TabIndex = 15;
@@ -173,7 +175,7 @@
             this.openCloseSpbtn.Enabled = false;
             this.openCloseSpbtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.openCloseSpbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseSpbtn.Location = new System.Drawing.Point(14, 270);
+            this.openCloseSpbtn.Location = new System.Drawing.Point(14, 300);
             this.openCloseSpbtn.Name = "openCloseSpbtn";
             this.openCloseSpbtn.Size = new System.Drawing.Size(74, 36);
             this.openCloseSpbtn.TabIndex = 17;
@@ -199,7 +201,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(109, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 312);
+            this.groupBox1.Size = new System.Drawing.Size(342, 342);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
@@ -207,7 +209,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(156, 291);
+            this.label8.Location = new System.Drawing.Point(156, 317);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 15);
             this.label8.TabIndex = 23;
@@ -215,7 +217,7 @@
             // 
             // sendtimetbx
             // 
-            this.sendtimetbx.Location = new System.Drawing.Point(93, 285);
+            this.sendtimetbx.Location = new System.Drawing.Point(93, 311);
             this.sendtimetbx.MaxLength = 9;
             this.sendtimetbx.Name = "sendtimetbx";
             this.sendtimetbx.Size = new System.Drawing.Size(62, 21);
@@ -227,7 +229,7 @@
             // 
             this.autoSendcbx.AutoSize = true;
             this.autoSendcbx.Enabled = false;
-            this.autoSendcbx.Location = new System.Drawing.Point(14, 287);
+            this.autoSendcbx.Location = new System.Drawing.Point(14, 313);
             this.autoSendcbx.Name = "autoSendcbx";
             this.autoSendcbx.Size = new System.Drawing.Size(79, 19);
             this.autoSendcbx.TabIndex = 21;
@@ -272,7 +274,7 @@
             // sendHexRadiobtn
             // 
             this.sendHexRadiobtn.AutoSize = true;
-            this.sendHexRadiobtn.Location = new System.Drawing.Point(200, 182);
+            this.sendHexRadiobtn.Location = new System.Drawing.Point(200, 188);
             this.sendHexRadiobtn.Name = "sendHexRadiobtn";
             this.sendHexRadiobtn.Size = new System.Drawing.Size(47, 19);
             this.sendHexRadiobtn.TabIndex = 17;
@@ -285,7 +287,7 @@
             // 
             this.sendStrRadiobtn.AutoSize = true;
             this.sendStrRadiobtn.Checked = true;
-            this.sendStrRadiobtn.Location = new System.Drawing.Point(139, 182);
+            this.sendStrRadiobtn.Location = new System.Drawing.Point(139, 188);
             this.sendStrRadiobtn.Name = "sendStrRadiobtn";
             this.sendStrRadiobtn.Size = new System.Drawing.Size(57, 19);
             this.sendStrRadiobtn.TabIndex = 16;
@@ -307,9 +309,9 @@
             // 
             // clearSendbtn
             // 
-            this.clearSendbtn.Location = new System.Drawing.Point(262, 178);
+            this.clearSendbtn.Location = new System.Drawing.Point(262, 182);
             this.clearSendbtn.Name = "clearSendbtn";
-            this.clearSendbtn.Size = new System.Drawing.Size(58, 23);
+            this.clearSendbtn.Size = new System.Drawing.Size(58, 25);
             this.clearSendbtn.TabIndex = 10;
             this.clearSendbtn.Text = "Clear";
             this.clearSendbtn.UseVisualStyleBackColor = true;
@@ -334,11 +336,11 @@
             this.sendtbx.BackColor = System.Drawing.SystemColors.InfoText;
             this.sendtbx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sendtbx.ForeColor = System.Drawing.SystemColors.Info;
-            this.sendtbx.Location = new System.Drawing.Point(7, 201);
+            this.sendtbx.Location = new System.Drawing.Point(7, 207);
             this.sendtbx.Multiline = true;
             this.sendtbx.Name = "sendtbx";
             this.sendtbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sendtbx.Size = new System.Drawing.Size(329, 75);
+            this.sendtbx.Size = new System.Drawing.Size(329, 98);
             this.sendtbx.TabIndex = 8;
             this.sendtbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtbx_KeyPress);
             // 
@@ -347,7 +349,7 @@
             this.sendbtn.AutoSize = true;
             this.sendbtn.Enabled = false;
             this.sendbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendbtn.Location = new System.Drawing.Point(262, 282);
+            this.sendbtn.Location = new System.Drawing.Point(262, 308);
             this.sendbtn.Name = "sendbtn";
             this.sendbtn.Size = new System.Drawing.Size(58, 28);
             this.sendbtn.TabIndex = 7;
@@ -367,7 +369,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 183);
+            this.label2.Location = new System.Drawing.Point(5, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 5;
@@ -448,7 +450,7 @@
             this.toolStripStatusRx,
             this.toolStripStatusTx,
             this.statusTimeLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 342);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(454, 22);
             this.statusStrip1.TabIndex = 21;
@@ -504,7 +506,7 @@
             // 
             // refreshbtn
             // 
-            this.refreshbtn.Location = new System.Drawing.Point(14, 231);
+            this.refreshbtn.Location = new System.Drawing.Point(14, 262);
             this.refreshbtn.Name = "refreshbtn";
             this.refreshbtn.Size = new System.Drawing.Size(74, 32);
             this.refreshbtn.TabIndex = 22;
@@ -514,6 +516,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.handshakingcbx);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.refreshbtn);
             this.groupBox2.Controls.Add(this.dataBitsCbx);
             this.groupBox2.Controls.Add(this.comListCbx);
@@ -528,16 +532,33 @@
             this.groupBox2.Controls.Add(this.stopBitsCbx);
             this.groupBox2.Location = new System.Drawing.Point(2, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(103, 312);
+            this.groupBox2.Size = new System.Drawing.Size(103, 342);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "COM";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 220);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 12);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "HandShaking:";
+            // 
+            // handshakingcbx
+            // 
+            this.handshakingcbx.FormattingEnabled = true;
+            this.handshakingcbx.Location = new System.Drawing.Point(14, 235);
+            this.handshakingcbx.Name = "handshakingcbx";
+            this.handshakingcbx.Size = new System.Drawing.Size(74, 20);
+            this.handshakingcbx.TabIndex = 24;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 364);
+            this.ClientSize = new System.Drawing.Size(454, 395);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
@@ -609,6 +630,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox handshakingcbx;
+        private System.Windows.Forms.Label label9;
     }
 }
 

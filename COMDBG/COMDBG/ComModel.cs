@@ -97,7 +97,8 @@ namespace COMDBG
         /// <param name="stopBits"></param>
         /// <param name="parity"></param>
         public void Open(string portName, String baudRate,
-            string dataBits, string stopBits, string parity)
+            string dataBits, string stopBits, string parity,
+            string handshake)
         {
             if (sp.IsOpen)
             {
@@ -106,13 +107,21 @@ namespace COMDBG
             sp.PortName = portName;
             sp.BaudRate = Convert.ToInt32(baudRate);
             sp.DataBits = Convert.ToInt16(dataBits);
-            sp.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits);
-            sp.Parity = (Parity)Enum.Parse(typeof(Parity), parity);
-            sp.RtsEnable = true; //Never delete this property
 
+            if (handshake == "None")
+            {
+                //Never delete this property
+                sp.RtsEnable = true; 
+                sp.DtrEnable = true;
+            }
+            
             SerialPortEventArgs args = new SerialPortEventArgs();
             try
             {
+                sp.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits);
+                sp.Parity = (Parity)Enum.Parse(typeof(Parity), parity);
+                sp.Handshake = (Handshake)Enum.Parse(typeof(Handshake), handshake);
+
                 sp.Open();
                 sp.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
                 args.isOpend = true;

@@ -113,6 +113,13 @@ namespace COMDBG
             //get the first item print in the text
             parityCbx.Text = parityCbx.Items[0].ToString();
 
+            //Handshaking
+            handshakingcbx.Items.Add("None");
+            handshakingcbx.Items.Add("XOnXOff");
+            handshakingcbx.Items.Add("RequestToSend");
+            handshakingcbx.Items.Add("RequestToSendXOnXOff");
+            handshakingcbx.Text = handshakingcbx.Items[0].ToString();
+
             //Com Ports
             string[] ArrayComPortsNames = SerialPort.GetPortNames();
             if (ArrayComPortsNames.Length == 0)
@@ -158,6 +165,7 @@ namespace COMDBG
                     dataBitsCbx.Enabled = false;
                     stopBitsCbx.Enabled = false;
                     parityCbx.Enabled = false;
+                    handshakingcbx.Enabled = false;
                     refreshbtn.Enabled = false;
 
                     if (autoSendcbx.Checked)
@@ -204,6 +212,7 @@ namespace COMDBG
                     dataBitsCbx.Enabled = true;
                     stopBitsCbx.Enabled = true;
                     parityCbx.Enabled = true;
+                    handshakingcbx.Enabled = true;
                     refreshbtn.Enabled = true;
                 }
             }
@@ -281,7 +290,8 @@ namespace COMDBG
             if (openCloseSpbtn.Text == "Open")
             {
                 controller.OpenSerialPort(comListCbx.Text, baudRateCbx.Text,
-                    dataBitsCbx.Text, stopBitsCbx.Text, parityCbx.Text);
+                    dataBitsCbx.Text, stopBitsCbx.Text, parityCbx.Text,
+                    handshakingcbx.Text);
             } 
             else
             {
