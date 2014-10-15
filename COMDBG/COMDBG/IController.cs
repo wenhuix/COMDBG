@@ -111,6 +111,7 @@ namespace COMDBG
         /// <param name="dataBits"></param>
         /// <param name="stopBits"></param>
         /// <param name="parity"></param>
+        /// <param name="handshake"></param>
         public void OpenSerialPort(string portName, String baudRate,
             string dataBits, string stopBits, string parity, string handshake)
         {
