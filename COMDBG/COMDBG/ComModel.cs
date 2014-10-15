@@ -108,6 +108,16 @@ namespace COMDBG
             sp.BaudRate = Convert.ToInt32(baudRate);
             sp.DataBits = Convert.ToInt16(dataBits);
 
+            /**
+             *  If the Handshake property is set to None the DTR and RTS pins 
+             *  are then freed up for the common use of Power, the PC on which
+             *  this is being typed gives +10.99 volts on the DTR pin & +10.99
+             *  volts again on the RTS pin if set to true. If set to false 
+             *  it gives -9.95 volts on the DTR, -9.94 volts on the RTS. 
+             *  These values are between +3 to +25 and -3 to -25 volts this 
+             *  give a dead zone to allow for noise immunity.
+             *  http://www.codeproject.com/Articles/678025/Serial-Comms-in-Csharp-for-Beginners
+             */
             if (handshake == "None")
             {
                 //Never delete this property
@@ -133,28 +143,30 @@ namespace COMDBG
             comOpenEvent.Invoke(this, args);
         }
 
-        //Take care to avoid deadlock when calling Close on the SerialPort 
-        //in response to a GUI event.
-        // An app involving the UI and the SerialPort freezes up when closing the SerialPort
-        // Deadlock can occur if Control.Invoke() is used in serial port event handlers
 
-        //The typical scenario we encounter is occasional deadlock in an app 
-        //that has a data received handler trying to update the GUI at the 
-        //same time the GUI thread is trying to close the SerialPort (for 
-        //example, in response to the user clicking a Close button).
+        /**
+        Take care to avoid deadlock when calling Close on the SerialPort 
+        in response to a GUI event.
+         An app involving the UI and the SerialPort freezes up when closing the SerialPort
+         Deadlock can occur if Control.Invoke() is used in serial port event handlers
 
-        //The reason deadlock happens is that Close() waits for events to 
-        //finish executing before it closes the port. You can address this 
-        //problem in your apps in two ways:
+        The typical scenario we encounter is occasional deadlock in an app 
+        that has a data received handler trying to update the GUI at the 
+        same time the GUI thread is trying to close the SerialPort (for 
+        example, in response to the user clicking a Close button).
 
-        //(1)In your event handlers, replace every Control.Invoke call with 
-        //Control.BeginInvoke, which executes asynchronously and avoids 
-        //the deadlock condition. This is commonly used for deadlock avoidance 
-        //when working with GUIs.
+        The reason deadlock happens is that Close() waits for events to 
+        finish executing before it closes the port. You can address this 
+        problem in your apps in two ways:
 
-        //(2)Call serialPort.Close() on a separate thread. You may prefer this
-        //because this is less invasive than updating your Invoke calls.
+        (1)In your event handlers, replace every Control.Invoke call with 
+        Control.BeginInvoke, which executes asynchronously and avoids 
+        the deadlock condition. This is commonly used for deadlock avoidance 
+        when working with GUIs.
 
+        (2)Call serialPort.Close() on a separate thread. You may prefer this
+        because this is less invasive than updating your Invoke calls.
+        */
         /// <summary>
         /// Close serial port
         /// </summary>
