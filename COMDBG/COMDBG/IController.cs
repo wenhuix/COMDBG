@@ -81,6 +81,16 @@ namespace COMDBG
         }
 
         /// <summary>
+        /// Hex to bytes
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        public static Byte[] Hex2Bytes(String hex)
+        {
+            return FromHex(hex);
+        }
+
+        /// <summary>
         /// String to hex
         /// </summary>
         /// <param name="str"></param>
@@ -92,7 +102,16 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// Send data to serial port
+        /// send bytes to serial port
+        /// </summary>
+        /// <param name="data"></param>
+        public void SendDataToCom(Byte[] data)
+        {
+            comModel.Send(data);
+        }
+
+        /// <summary>
+        /// Send string to serial port
         /// </summary>
         /// <param name="str"></param>
         public void SendDataToCom(String str)

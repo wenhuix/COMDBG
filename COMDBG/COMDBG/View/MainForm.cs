@@ -340,14 +340,22 @@ namespace COMDBG
             {
                 return;
             }
-            //If hex radio checked, should convert to string first
+            
             if (sendHexRadiobtn.Checked)
             {
-                sendText = IController.Hex2String(sendText);
+                //If hex radio checked
+                //send bytes to serial port
+                Byte[] bytes = IController.Hex2Bytes(sendText);
+                controller.SendDataToCom(bytes);
+                sendBytesCount += bytes.Length;
             }
-            //send data to serial port
-            controller.SendDataToCom(sendText);
-            sendBytesCount += sendText.Length;
+            else
+            {
+                //send String to serial port
+                controller.SendDataToCom(sendText);
+                sendBytesCount += sendText.Length;
+            }
+            
             toolStripStatusTx.Text = "Sent: " + sendBytesCount.ToString();
         }
 
