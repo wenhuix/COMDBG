@@ -84,12 +84,24 @@ namespace COMDBG
         /// Send bytes to device
         /// </summary>
         /// <param name="bytes"></param>
-        public void Send(Byte[] bytes)
+        /// <returns></returns>
+        public bool Send(Byte[] bytes)
         {
-            if (sp.IsOpen)
+            if (!sp.IsOpen)
+            {
+                return false;      
+            }
+
+            try
             {
                 sp.Write(bytes, 0, bytes.Length);
             }
+            catch (System.Exception e)
+            {
+                return false;   //write failed
+            }
+            return true;        //write successfully
+              
         }
 
         /// <summary>
@@ -136,7 +148,7 @@ namespace COMDBG
                 sp.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits);
                 sp.Parity = (Parity)Enum.Parse(typeof(Parity), parity);
                 sp.Handshake = (Handshake)Enum.Parse(typeof(Handshake), handshake);
-
+                sp.WriteTimeout = 1000; /*Write time out*/
                 sp.Open();
                 sp.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
                 args.isOpend = true;

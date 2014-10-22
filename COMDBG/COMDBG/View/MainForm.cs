@@ -336,6 +336,7 @@ namespace COMDBG
         private void sendbtn_Click(object sender, EventArgs e)
         {
             String sendText = sendtbx.Text;
+            bool flag = false;
             if (sendText == null)
             {
                 return;
@@ -346,16 +347,27 @@ namespace COMDBG
                 //If hex radio checked
                 //send bytes to serial port
                 Byte[] bytes = IController.Hex2Bytes(sendText);
-                controller.SendDataToCom(bytes);
+                sendbtn.Enabled = false;//wait return
+                flag = controller.SendDataToCom(bytes);
+                sendbtn.Enabled = true;
                 sendBytesCount += bytes.Length;
             }
             else
             {
                 //send String to serial port
-                controller.SendDataToCom(sendText);
+                sendbtn.Enabled = false;//wait return
+                flag = controller.SendDataToCom(sendText);
+                sendbtn.Enabled = true;
                 sendBytesCount += sendText.Length;
             }
-            
+            if (flag)
+            {
+                statuslabel.Text = "Send OK !";
+            }
+            else
+            {
+                statuslabel.Text = "Send failed !";
+            }
             toolStripStatusTx.Text = "Sent: " + sendBytesCount.ToString();
         }
 

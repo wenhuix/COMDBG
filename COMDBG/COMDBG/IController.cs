@@ -105,21 +105,24 @@ namespace COMDBG
         /// send bytes to serial port
         /// </summary>
         /// <param name="data"></param>
-        public void SendDataToCom(Byte[] data)
+        /// <returns></returns>
+        public bool SendDataToCom(Byte[] data)
         {
-            comModel.Send(data);
+            return comModel.Send(data);
         }
 
         /// <summary>
         /// Send string to serial port
         /// </summary>
         /// <param name="str"></param>
-        public void SendDataToCom(String str)
+        /// <returns></returns>
+        public bool SendDataToCom(String str)
         {
             if (str != null && str != "")
             {
-                comModel.Send(Encoding.Default.GetBytes(str));
+                return comModel.Send(Encoding.Default.GetBytes(str));
             }
+            return true;
         }
 
         /// <summary>
