@@ -96,7 +96,7 @@ namespace COMDBG
             {
                 sp.Write(bytes, 0, bytes.Length);
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
                 return false;   //write failed
             }
@@ -119,7 +119,7 @@ namespace COMDBG
         {
             if (sp.IsOpen)
             {
-                sp.Close();
+                Close();
             }
             sp.PortName = portName;
             sp.BaudRate = Convert.ToInt32(baudRate);
@@ -193,6 +193,9 @@ namespace COMDBG
             closeThread.Start();
         }
 
+        /// <summary>
+        /// Close serial port thread
+        /// </summary>
         private void CloseSpThread()
         {
             SerialPortEventArgs args = new SerialPortEventArgs();
@@ -200,6 +203,7 @@ namespace COMDBG
             try
             {
                 sp.Close(); //close the serial port
+                sp.DataReceived -= new SerialDataReceivedEventHandler(DataReceived);
             }
             catch (Exception)
             {
