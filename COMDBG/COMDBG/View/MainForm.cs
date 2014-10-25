@@ -443,6 +443,7 @@ namespace COMDBG
                     return;
                 }
                 sendtbx.Text = IController.String2Hex(sendtbx.Text);
+                addCRCcbx.Enabled = true;
             }
         }
 
@@ -460,6 +461,7 @@ namespace COMDBG
                     return;
                 }
                 sendtbx.Text = IController.Hex2String(sendtbx.Text);
+                addCRCcbx.Enabled = false;
             }
         }
 
@@ -509,11 +511,11 @@ namespace COMDBG
             if (autoSendcbx.Checked)
             {
                 autoSendtimer.Enabled = true;
-                autoSendtimer.Interval = int.Parse(sendtimetbx.Text);
+                autoSendtimer.Interval = int.Parse(sendIntervalTimetbx.Text);
                 autoSendtimer.Start();
 
                 //disable send botton and textbox
-                sendtimetbx.Enabled = false;
+                sendIntervalTimetbx.Enabled = false;
                 sendtbx.ReadOnly = true;
                 sendbtn.Enabled = false;
             }
@@ -523,7 +525,7 @@ namespace COMDBG
                 autoSendtimer.Stop();
 
                 //enable send botton and textbox
-                sendtimetbx.Enabled = true;
+                sendIntervalTimetbx.Enabled = true;
                 sendtbx.ReadOnly = false;
                 sendbtn.Enabled = true;
             }
@@ -535,11 +537,11 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// filter illegal input
+        /// filter illegal input of auto send interval time
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void sendtimetbx_KeyPress(object sender, KeyPressEventArgs e)
+        private void sendIntervalTimetbx_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
             {
@@ -549,6 +551,38 @@ namespace COMDBG
             {
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// Add CRC checkbox changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addCRCcbx_CheckedChanged(object sender, EventArgs e)
+        {
+            String sendText = sendtbx.Text;
+            if (sendText == null || sendText == "")
+            {
+                addCRCcbx.Checked = false;
+                return;
+            }
+            if (addCRCcbx.Checked)
+            {
+                //Add 2 bytes CRC to the end of the data
+                Byte[] senddata = IController.Hex2Bytes(sendText);
+                Byte[] crcbytes = BitConverter.GetBytes(CRC16.Compute(senddata));
+                sendText += "-" + BitConverter.ToString(crcbytes, 1, 1);
+                sendText += "-" + BitConverter.ToString(crcbytes, 0, 1);
+            }
+            else
+            {
+                //Delete 2 bytes CRC to the end of the data
+                if (sendText.Length >= 6)
+                {
+                    sendText = sendText.Substring(0, sendText.Length - 6);
+                }
+            }
+            sendtbx.Text = sendText;
         }
 
         /// <summary>
@@ -638,6 +672,7 @@ namespace COMDBG
                 help.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
             }
         }
+
 
     }
 }

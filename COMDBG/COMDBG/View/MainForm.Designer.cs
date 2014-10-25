@@ -42,8 +42,9 @@
             this.parityCbx = new System.Windows.Forms.ComboBox();
             this.openCloseSpbtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.addCRCcbx = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.sendtimetbx = new System.Windows.Forms.TextBox();
+            this.sendIntervalTimetbx = new System.Windows.Forms.TextBox();
             this.autoSendcbx = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.recHexRadiobtn = new System.Windows.Forms.RadioButton();
@@ -185,8 +186,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.addCRCcbx);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.sendtimetbx);
+            this.groupBox1.Controls.Add(this.sendIntervalTimetbx);
             this.groupBox1.Controls.Add(this.autoSendcbx);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.sendHexRadiobtn);
@@ -201,29 +203,41 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(109, 30);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 371);
+            this.groupBox1.Size = new System.Drawing.Size(358, 371);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
             // 
+            // addCRCcbx
+            // 
+            this.addCRCcbx.AutoSize = true;
+            this.addCRCcbx.Enabled = false;
+            this.addCRCcbx.Location = new System.Drawing.Point(186, 339);
+            this.addCRCcbx.Name = "addCRCcbx";
+            this.addCRCcbx.Size = new System.Drawing.Size(75, 19);
+            this.addCRCcbx.TabIndex = 24;
+            this.addCRCcbx.Text = "Add CRC";
+            this.addCRCcbx.UseVisualStyleBackColor = true;
+            this.addCRCcbx.CheckedChanged += new System.EventHandler(this.addCRCcbx_CheckedChanged);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(156, 340);
+            this.label8.Location = new System.Drawing.Point(143, 340);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 15);
             this.label8.TabIndex = 23;
             this.label8.Text = "ms";
             // 
-            // sendtimetbx
+            // sendIntervalTimetbx
             // 
-            this.sendtimetbx.Location = new System.Drawing.Point(93, 337);
-            this.sendtimetbx.MaxLength = 9;
-            this.sendtimetbx.Name = "sendtimetbx";
-            this.sendtimetbx.Size = new System.Drawing.Size(62, 21);
-            this.sendtimetbx.TabIndex = 22;
-            this.sendtimetbx.Text = "1000";
-            this.sendtimetbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtimetbx_KeyPress);
+            this.sendIntervalTimetbx.Location = new System.Drawing.Point(93, 337);
+            this.sendIntervalTimetbx.MaxLength = 9;
+            this.sendIntervalTimetbx.Name = "sendIntervalTimetbx";
+            this.sendIntervalTimetbx.Size = new System.Drawing.Size(44, 21);
+            this.sendIntervalTimetbx.TabIndex = 22;
+            this.sendIntervalTimetbx.Text = "1000";
+            this.sendIntervalTimetbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendIntervalTimetbx_KeyPress);
             // 
             // autoSendcbx
             // 
@@ -299,7 +313,7 @@
             // clearReceivebtn
             // 
             this.clearReceivebtn.AutoSize = true;
-            this.clearReceivebtn.Location = new System.Drawing.Point(262, 14);
+            this.clearReceivebtn.Location = new System.Drawing.Point(278, 14);
             this.clearReceivebtn.Name = "clearReceivebtn";
             this.clearReceivebtn.Size = new System.Drawing.Size(58, 27);
             this.clearReceivebtn.TabIndex = 11;
@@ -309,7 +323,7 @@
             // 
             // clearSendbtn
             // 
-            this.clearSendbtn.Location = new System.Drawing.Point(262, 197);
+            this.clearSendbtn.Location = new System.Drawing.Point(278, 196);
             this.clearSendbtn.Name = "clearSendbtn";
             this.clearSendbtn.Size = new System.Drawing.Size(58, 27);
             this.clearSendbtn.TabIndex = 10;
@@ -327,7 +341,7 @@
             this.receivetbx.Name = "receivetbx";
             this.receivetbx.ReadOnly = true;
             this.receivetbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.receivetbx.Size = new System.Drawing.Size(329, 152);
+            this.receivetbx.Size = new System.Drawing.Size(346, 152);
             this.receivetbx.TabIndex = 9;
             this.receivetbx.TextChanged += new System.EventHandler(this.receivetbx_TextChanged);
             // 
@@ -340,7 +354,7 @@
             this.sendtbx.Multiline = true;
             this.sendtbx.Name = "sendtbx";
             this.sendtbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sendtbx.Size = new System.Drawing.Size(329, 106);
+            this.sendtbx.Size = new System.Drawing.Size(345, 106);
             this.sendtbx.TabIndex = 8;
             this.sendtbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtbx_KeyPress);
             // 
@@ -349,7 +363,7 @@
             this.sendbtn.AutoSize = true;
             this.sendbtn.Enabled = false;
             this.sendbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendbtn.Location = new System.Drawing.Point(262, 334);
+            this.sendbtn.Location = new System.Drawing.Point(278, 333);
             this.sendbtn.Name = "sendbtn";
             this.sendbtn.Size = new System.Drawing.Size(58, 30);
             this.sendbtn.TabIndex = 7;
@@ -424,7 +438,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(454, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(474, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -452,7 +466,7 @@
             this.statusTimeLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 406);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(454, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(474, 22);
             this.statusStrip1.TabIndex = 21;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -461,7 +475,7 @@
             this.statuslabel.ActiveLinkColor = System.Drawing.SystemColors.ButtonHighlight;
             this.statuslabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statuslabel.Name = "statuslabel";
-            this.statuslabel.Size = new System.Drawing.Size(146, 17);
+            this.statuslabel.Size = new System.Drawing.Size(153, 17);
             this.statuslabel.Spring = true;
             this.statuslabel.Text = "Not Connected";
             this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -475,7 +489,7 @@
             // 
             this.toolStripStatusRx.ActiveLinkColor = System.Drawing.SystemColors.Info;
             this.toolStripStatusRx.Name = "toolStripStatusRx";
-            this.toolStripStatusRx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusRx.Size = new System.Drawing.Size(153, 17);
             this.toolStripStatusRx.Spring = true;
             this.toolStripStatusRx.Text = "Received:";
             this.toolStripStatusRx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -483,7 +497,7 @@
             // toolStripStatusTx
             // 
             this.toolStripStatusTx.Name = "toolStripStatusTx";
-            this.toolStripStatusTx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusTx.Size = new System.Drawing.Size(153, 17);
             this.toolStripStatusTx.Spring = true;
             this.toolStripStatusTx.Text = "Sent:";
             this.toolStripStatusTx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -558,7 +572,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 428);
+            this.ClientSize = new System.Drawing.Size(474, 428);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
@@ -624,7 +638,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusTx;
         private System.Windows.Forms.CheckBox autoSendcbx;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox sendtimetbx;
+        private System.Windows.Forms.TextBox sendIntervalTimetbx;
         private System.Windows.Forms.Timer autoSendtimer;
         private System.Windows.Forms.Button refreshbtn;
         private System.Windows.Forms.Label label1;
@@ -632,6 +646,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox handshakingcbx;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox addCRCcbx;
     }
 }
 
