@@ -381,6 +381,7 @@ namespace COMDBG
             sendtbx.Text = "";
             toolStripStatusTx.Text = "Sent: 0";
             sendBytesCount = 0;
+            addCRCcbx.Checked = false;
         }
 
         /// <summary>
