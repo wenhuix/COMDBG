@@ -46,8 +46,11 @@ namespace COMDBG
     public interface IView
     {
         void SetController(IController controller);
+        //Open serial port event
         void OpenComEvent(Object sender, SerialPortEventArgs e);
+        //Close serial port event
         void CloseComEvent(Object sender, SerialPortEventArgs e);
+        //Serial port receive data event
         void ComReceiveDataEvent(Object sender, SerialPortEventArgs e);
     }
 
@@ -56,8 +59,6 @@ namespace COMDBG
         private IController controller;
         private int sendBytesCount = 0;
         private int receiveBytesCount = 0;
-
-        delegate void ComCallBack(Object model, SerialPortEventArgs e);
 
         public MainForm()
         {
@@ -70,13 +71,17 @@ namespace COMDBG
             this.MinimizeBox = false;
         }
 
+        /// <summary>
+        /// Set controller
+        /// </summary>
+        /// <param name="controller"></param>
         public void SetController(IController controller)
         {
             this.controller = controller;
         }
 
         /// <summary>
-        /// Initialize serial port infomation
+        /// Initialize serial port information
         /// </summary>
         private void InitializeCOMCombox()
         {
@@ -146,10 +151,10 @@ namespace COMDBG
         /// <param name="e"></param>
         public void OpenComEvent(Object sender, SerialPortEventArgs e)
         {
-            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
+            if (this.InvokeRequired)
             {
-                ComCallBack cb = new ComCallBack(OpenComEvent);
-                this.Invoke(cb, new object[] { sender, e });
+                Invoke(new Action<Object, SerialPortEventArgs>(OpenComEvent), sender, e);
+                return;
             }
             else
             {
@@ -190,10 +195,10 @@ namespace COMDBG
         /// <param name="e"></param>
         public void CloseComEvent(Object sender, SerialPortEventArgs e)
         {
-            if (this.openCloseSpbtn.InvokeRequired || sendbtn.InvokeRequired)
+            if (this.InvokeRequired)
             {
-                ComCallBack cb = new ComCallBack(CloseComEvent);
-                this.Invoke(cb, new object[] { sender, e });
+                Invoke(new Action<Object, SerialPortEventArgs>(CloseComEvent), sender, e);
+                return;
             }
             else
             {
@@ -225,18 +230,17 @@ namespace COMDBG
         /// <param name="e"></param>
         public void ComReceiveDataEvent(Object sender, SerialPortEventArgs e)
         {
-            if (this.receivetbx.InvokeRequired)
+            if (this.InvokeRequired)
             {
-                ComCallBack cb = new ComCallBack(ComReceiveDataEvent);
                 try
                 {
-                    this.Invoke(cb, new object[] { sender, e });
+                    Invoke(new Action<Object, SerialPortEventArgs>(ComReceiveDataEvent), sender, e);
                 }
                 catch (System.Exception)
                 {
-                	//disable form destroy exception
+                    //disable form destroy exception
                 }
-                
+                return;
             }
             else
             {
