@@ -343,6 +343,7 @@
             this.receivetbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.receivetbx.Size = new System.Drawing.Size(346, 152);
             this.receivetbx.TabIndex = 9;
+            this.receivetbx.TabStop = false;
             this.receivetbx.TextChanged += new System.EventHandler(this.receivetbx_TextChanged);
             // 
             // sendtbx

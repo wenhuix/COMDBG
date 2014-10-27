@@ -238,7 +238,7 @@ namespace COMDBG
                 }
                 catch (System.Exception)
                 {
-                	//disable form destroy exception
+                    //disable form destroy exception
                 }
                 return;
             }
@@ -345,7 +345,9 @@ namespace COMDBG
             {
                 return;
             }
-            
+            //set select index to the end
+            sendtbx.SelectionStart = sendtbx.TextLength; 
+          
             if (sendHexRadiobtn.Checked)
             {
                 //If hex radio checked
@@ -372,6 +374,7 @@ namespace COMDBG
             {
                 statuslabel.Text = "Send failed !";
             }
+            //update status bar
             toolStripStatusTx.Text = "Sent: " + sendBytesCount.ToString();
         }
 
