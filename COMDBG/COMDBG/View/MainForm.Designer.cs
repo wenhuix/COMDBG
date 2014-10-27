@@ -199,9 +199,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(109, 30);
+            this.groupBox1.Location = new System.Drawing.Point(109, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 371);
+            this.groupBox1.Size = new System.Drawing.Size(367, 368);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
@@ -299,7 +299,7 @@
             // clearReceivebtn
             // 
             this.clearReceivebtn.AutoSize = true;
-            this.clearReceivebtn.Location = new System.Drawing.Point(262, 14);
+            this.clearReceivebtn.Location = new System.Drawing.Point(287, 13);
             this.clearReceivebtn.Name = "clearReceivebtn";
             this.clearReceivebtn.Size = new System.Drawing.Size(58, 27);
             this.clearReceivebtn.TabIndex = 11;
@@ -309,7 +309,7 @@
             // 
             // clearSendbtn
             // 
-            this.clearSendbtn.Location = new System.Drawing.Point(262, 197);
+            this.clearSendbtn.Location = new System.Drawing.Point(287, 196);
             this.clearSendbtn.Name = "clearSendbtn";
             this.clearSendbtn.Size = new System.Drawing.Size(58, 27);
             this.clearSendbtn.TabIndex = 10;
@@ -327,7 +327,7 @@
             this.receivetbx.Name = "receivetbx";
             this.receivetbx.ReadOnly = true;
             this.receivetbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.receivetbx.Size = new System.Drawing.Size(329, 152);
+            this.receivetbx.Size = new System.Drawing.Size(354, 152);
             this.receivetbx.TabIndex = 9;
             this.receivetbx.TabStop = false;
             this.receivetbx.TextChanged += new System.EventHandler(this.receivetbx_TextChanged);
@@ -341,7 +341,7 @@
             this.sendtbx.Multiline = true;
             this.sendtbx.Name = "sendtbx";
             this.sendtbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.sendtbx.Size = new System.Drawing.Size(329, 106);
+            this.sendtbx.Size = new System.Drawing.Size(354, 106);
             this.sendtbx.TabIndex = 8;
             this.sendtbx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendtbx_KeyPress);
             // 
@@ -350,7 +350,7 @@
             this.sendbtn.AutoSize = true;
             this.sendbtn.Enabled = false;
             this.sendbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendbtn.Location = new System.Drawing.Point(262, 334);
+            this.sendbtn.Location = new System.Drawing.Point(287, 332);
             this.sendbtn.Name = "sendbtn";
             this.sendbtn.Size = new System.Drawing.Size(58, 30);
             this.sendbtn.TabIndex = 7;
@@ -381,8 +381,9 @@
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.quitToolStripMenuItem});
+            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(39, 26);
             this.aboutToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
@@ -391,32 +392,33 @@
             this.receivedDataToolStripMenuItem,
             this.sendDataToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // receivedDataToolStripMenuItem
             // 
             this.receivedDataToolStripMenuItem.Name = "receivedDataToolStripMenuItem";
-            this.receivedDataToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.receivedDataToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.receivedDataToolStripMenuItem.Text = "Received Data...";
             this.receivedDataToolStripMenuItem.Click += new System.EventHandler(this.receivedDataToolStripMenuItem_Click);
             // 
             // sendDataToolStripMenuItem
             // 
             this.sendDataToolStripMenuItem.Name = "sendDataToolStripMenuItem";
-            this.sendDataToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.sendDataToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.sendDataToolStripMenuItem.Text = "Send Data...";
             this.sendDataToolStripMenuItem.Click += new System.EventHandler(this.sendDataToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.AutoSize = false;
             this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
@@ -425,21 +427,23 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(454, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(488, 30);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // aboutToolStripMenuItem1
             // 
+            this.aboutToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(55, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 26);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
@@ -453,7 +457,7 @@
             this.statusTimeLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 406);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(454, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(488, 22);
             this.statusStrip1.TabIndex = 21;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -462,7 +466,7 @@
             this.statuslabel.ActiveLinkColor = System.Drawing.SystemColors.ButtonHighlight;
             this.statuslabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statuslabel.Name = "statuslabel";
-            this.statuslabel.Size = new System.Drawing.Size(146, 17);
+            this.statuslabel.Size = new System.Drawing.Size(157, 17);
             this.statuslabel.Spring = true;
             this.statuslabel.Text = "Not Connected";
             this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -476,7 +480,7 @@
             // 
             this.toolStripStatusRx.ActiveLinkColor = System.Drawing.SystemColors.Info;
             this.toolStripStatusRx.Name = "toolStripStatusRx";
-            this.toolStripStatusRx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusRx.Size = new System.Drawing.Size(157, 17);
             this.toolStripStatusRx.Spring = true;
             this.toolStripStatusRx.Text = "Received:";
             this.toolStripStatusRx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -484,7 +488,7 @@
             // toolStripStatusTx
             // 
             this.toolStripStatusTx.Name = "toolStripStatusTx";
-            this.toolStripStatusTx.Size = new System.Drawing.Size(146, 17);
+            this.toolStripStatusTx.Size = new System.Drawing.Size(157, 17);
             this.toolStripStatusTx.Spring = true;
             this.toolStripStatusTx.Text = "Sent:";
             this.toolStripStatusTx.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -531,9 +535,9 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.stopBitsCbx);
-            this.groupBox2.Location = new System.Drawing.Point(2, 30);
+            this.groupBox2.Location = new System.Drawing.Point(2, 33);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(103, 371);
+            this.groupBox2.Size = new System.Drawing.Size(103, 368);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "COM";
@@ -559,7 +563,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 428);
+            this.ClientSize = new System.Drawing.Size(488, 428);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
