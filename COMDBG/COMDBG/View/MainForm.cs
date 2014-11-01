@@ -156,35 +156,33 @@ namespace COMDBG
                 Invoke(new Action<Object, SerialPortEventArgs>(OpenComEvent), sender, e);
                 return;
             }
-            else
+
+            if (e.isOpend)  //Open successfully
             {
-                if (e.isOpend)  //Open successfully
-                {
-                    statuslabel.Text = comListCbx.Text + " Opend";
-                    openCloseSpbtn.Text = "Close";
-                    sendbtn.Enabled = true;
-                    autoSendcbx.Enabled = true;
+                statuslabel.Text = comListCbx.Text + " Opend";
+                openCloseSpbtn.Text = "Close";
+                sendbtn.Enabled = true;
+                autoSendcbx.Enabled = true;
 
-                    comListCbx.Enabled = false;
-                    baudRateCbx.Enabled = false;
-                    dataBitsCbx.Enabled = false;
-                    stopBitsCbx.Enabled = false;
-                    parityCbx.Enabled = false;
-                    handshakingcbx.Enabled = false;
-                    refreshbtn.Enabled = false;
+                comListCbx.Enabled = false;
+                baudRateCbx.Enabled = false;
+                dataBitsCbx.Enabled = false;
+                stopBitsCbx.Enabled = false;
+                parityCbx.Enabled = false;
+                handshakingcbx.Enabled = false;
+                refreshbtn.Enabled = false;
 
-                    if (autoSendcbx.Checked)
-                    {
-                        autoSendtimer.Start();
-                        sendtbx.ReadOnly = true;
-                    }
-                }
-                else    //Open failed
+                if (autoSendcbx.Checked)
                 {
-                    statuslabel.Text = "Open failed !";
-                    sendbtn.Enabled = false;
-                    autoSendcbx.Enabled = false;
+                    autoSendtimer.Start();
+                    sendtbx.ReadOnly = true;
                 }
+            }
+            else    //Open failed
+            {
+                statuslabel.Text = "Open failed !";
+                sendbtn.Enabled = false;
+                autoSendcbx.Enabled = false;
             }
         }
 
@@ -200,26 +198,24 @@ namespace COMDBG
                 Invoke(new Action<Object, SerialPortEventArgs>(CloseComEvent), sender, e);
                 return;
             }
-            else
+
+            if (!e.isOpend) //close successfully
             {
-                if (!e.isOpend) //close successfully
-                {
-                    statuslabel.Text = comListCbx.Text + " Closed";
-                    openCloseSpbtn.Text = "Open";
+                statuslabel.Text = comListCbx.Text + " Closed";
+                openCloseSpbtn.Text = "Open";
 
-                    sendbtn.Enabled = false;
-                    sendtbx.ReadOnly = false;
-                    autoSendcbx.Enabled = false;
-                    autoSendtimer.Stop();
+                sendbtn.Enabled = false;
+                sendtbx.ReadOnly = false;
+                autoSendcbx.Enabled = false;
+                autoSendtimer.Stop();
 
-                    comListCbx.Enabled = true;
-                    baudRateCbx.Enabled = true;
-                    dataBitsCbx.Enabled = true;
-                    stopBitsCbx.Enabled = true;
-                    parityCbx.Enabled = true;
-                    handshakingcbx.Enabled = true;
-                    refreshbtn.Enabled = true;
-                }
+                comListCbx.Enabled = true;
+                baudRateCbx.Enabled = true;
+                dataBitsCbx.Enabled = true;
+                stopBitsCbx.Enabled = true;
+                parityCbx.Enabled = true;
+                handshakingcbx.Enabled = true;
+                refreshbtn.Enabled = true;
             }
         }
 
@@ -242,25 +238,22 @@ namespace COMDBG
                 }
                 return;
             }
-            else
-            {
-                if (recStrRadiobtn.Checked) //display as string
-                {
-                    receivetbx.AppendText(e.receivedString);
-                }
-                else //display as hex
-                {
-                    if (receivetbx.Text.Length > 0)
-                    {
-                        receivetbx.AppendText("-");
-                    }
-                    receivetbx.AppendText(IController.String2Hex(e.receivedString));
-                }
-                //update status bar
-                receiveBytesCount += e.receivedString.Length;
-                toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
-            }
 
+            if (recStrRadiobtn.Checked) //display as string
+            {
+                receivetbx.AppendText(e.receivedString);
+            }
+            else //display as hex
+            {
+                if (receivetbx.Text.Length > 0)
+                {
+                    receivetbx.AppendText("-");
+                }
+                receivetbx.AppendText(IController.String2Hex(e.receivedString));
+            }
+            //update status bar
+            receiveBytesCount += e.receivedString.Length;
+            toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
         }
 
         /// <summary>
