@@ -1,4 +1,4 @@
-Serail port debug assistant
+[Serail port debug assistant](http://wenhuix.github.io/project/comdbg.html)
 ======
 This tool is C# Serial port debug assistant. It can send and receive data from serial port. The most importment thing is that it is concise and NO AD!
 ### Note:
@@ -13,8 +13,8 @@ This tool is C# Serial port debug assistant. It can send and receive data from s
 * Concise and open source.
 * No dependency
 
-串口调试助手
-=====
+[串口调试助手](http://wenhuix.github.io/project/comdbg.html)
+======
 这是C#串口调试工具，基于.Net4.0，实现基本的串口通信功能，重要的是无广告以及开源。
 ### 注意：
 
