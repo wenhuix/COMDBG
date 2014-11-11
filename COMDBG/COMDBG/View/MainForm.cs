@@ -241,7 +241,7 @@ namespace COMDBG
 
             if (recStrRadiobtn.Checked) //display as string
             {
-                receivetbx.AppendText(e.receivedString);
+                receivetbx.AppendText(Encoding.Default.GetString(e.receivedBytes));
             }
             else //display as hex
             {
@@ -249,10 +249,10 @@ namespace COMDBG
                 {
                     receivetbx.AppendText("-");
                 }
-                receivetbx.AppendText(IController.String2Hex(e.receivedString));
+                receivetbx.AppendText(IController.Bytes2Hex(e.receivedBytes));
             }
             //update status bar
-            receiveBytesCount += e.receivedString.Length;
+            receiveBytesCount += e.receivedBytes.Length;
             toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
         }
 

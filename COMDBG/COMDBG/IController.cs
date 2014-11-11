@@ -78,18 +78,29 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// Hex to string
+        /// Hex string to string
         /// </summary>
         /// <param name="hex"></param>
         /// <returns></returns>
         public static String Hex2String(String hex)
         {
             byte[] data = FromHex(hex);
-            return Encoding.ASCII.GetString(data);
+            return Encoding.Default.GetString(data);
         }
 
         /// <summary>
-        /// Hex to bytes
+        /// String to hex string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static String String2Hex(String str)
+        {
+            Byte[] data = Encoding.Default.GetBytes(str);
+            return BitConverter.ToString(data);
+        }
+
+        /// <summary>
+        /// Hex string to bytes
         /// </summary>
         /// <param name="hex"></param>
         /// <returns></returns>
@@ -99,14 +110,13 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// String to hex
+        /// Bytes to Hex String
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="bytes"></param>
         /// <returns></returns>
-        public static String String2Hex(String str)
+        public static String Bytes2Hex(Byte[] bytes)
         {
-            Byte[] data = Encoding.Default.GetBytes(str);
-            return BitConverter.ToString(data);
+            return BitConverter.ToString(bytes);
         }
 
         /// <summary>

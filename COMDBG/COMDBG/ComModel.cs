@@ -45,7 +45,7 @@ namespace COMDBG
     public class SerialPortEventArgs : EventArgs
     {
         public bool isOpend = false;
-        public String receivedString = "";
+        public Byte[] receivedBytes = null;
     }
 
     public class ComModel
@@ -56,6 +56,8 @@ namespace COMDBG
         public event SerialPortEventHandler comOpenEvent = null;
         public event SerialPortEventHandler comCloseEvent = null;
 
+        private Object thisLock = new Object();
+
         /// <summary>
         /// When serial received data, will call this method
         /// </summary>
@@ -63,20 +65,28 @@ namespace COMDBG
         /// <param name="e"></param>
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (sp.IsOpen && sp.BytesToRead > 0)
+            if (sp.BytesToRead <= 0)
             {
-                string str = "";
+                return;
+            }
+            lock (thisLock)
+            {
+                int len = sp.BytesToRead;
+                Byte[] data = new Byte[len];
                 try
                 {
-                    str = sp.ReadExisting();
+                    sp.Read(data, 0, len);
                 }
                 catch (System.Exception)
                 {
-                	//catch read exception
+                    //catch read exception
                 }
                 SerialPortEventArgs args = new SerialPortEventArgs();
-                args.receivedString = str;
-                comReceiveDataEvent.Invoke(this, args);
+                args.receivedBytes = data;
+                if (comReceiveDataEvent != null)
+                {
+                    comReceiveDataEvent.Invoke(this, args);
+                }
             }
         }
 
@@ -91,7 +101,6 @@ namespace COMDBG
             {
                 return false;      
             }
-
             try
             {
                 sp.Write(bytes, 0, bytes.Length);
@@ -157,7 +166,11 @@ namespace COMDBG
             {
                 args.isOpend = false;
             }
-            comOpenEvent.Invoke(this, args);
+            if (comOpenEvent != null)
+            {
+                comOpenEvent.Invoke(this, args);
+            }
+            
         }
 
 
@@ -209,8 +222,11 @@ namespace COMDBG
             {
                 args.isOpend = true;
             }
-
-            comCloseEvent.Invoke(this, args);
+            if (comCloseEvent != null)
+            {
+                comCloseEvent.Invoke(this, args);
+            }
+            
         }
 
     }
