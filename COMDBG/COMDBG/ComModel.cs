@@ -69,6 +69,10 @@ namespace COMDBG
             {
                 return;
             }
+            //Thread Safety explain in MSDN:
+            // Any public static (Shared in Visual Basic) members of this type are thread safe. 
+            // Any instance members are not guaranteed to be thread safe.
+            // So, we need to synchronize I/O
             lock (thisLock)
             {
                 int len = sp.BytesToRead;
@@ -101,16 +105,18 @@ namespace COMDBG
             {
                 return false;      
             }
-            try
+            lock (thisLock)
             {
-                sp.Write(bytes, 0, bytes.Length);
-            }
-            catch (System.Exception)
-            {
-                return false;   //write failed
+                try
+                {
+                    sp.Write(bytes, 0, bytes.Length);
+                }
+                catch (System.Exception)
+                {
+                    return false;   //write failed
+                }
             }
             return true;        //write successfully
-              
         }
 
         /// <summary>
