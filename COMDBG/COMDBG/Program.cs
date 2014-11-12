@@ -40,7 +40,7 @@ namespace COMDBG
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// Entry point of the program
         /// </summary>
         [STAThread]
         static void Main()
