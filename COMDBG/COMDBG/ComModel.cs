@@ -93,7 +93,7 @@ namespace COMDBG
                 }
             }
         }
-
+        
         /// <summary>
         /// Send bytes to device
         /// </summary>
@@ -105,16 +105,14 @@ namespace COMDBG
             {
                 return false;      
             }
-            lock (thisLock)
+
+            try
             {
-                try
-                {
-                    sp.Write(bytes, 0, bytes.Length);
-                }
-                catch (System.Exception)
-                {
-                    return false;   //write failed
-                }
+                sp.Write(bytes, 0, bytes.Length);  
+            }
+            catch (System.Exception)
+            {
+                return false;   //write failed
             }
             return true;        //write successfully
         }
