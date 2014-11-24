@@ -163,6 +163,7 @@ namespace COMDBG
                 openCloseSpbtn.Text = "Close";
                 sendbtn.Enabled = true;
                 autoSendcbx.Enabled = true;
+                autoReplyCbx.Enabled = true;
 
                 comListCbx.Enabled = false;
                 baudRateCbx.Enabled = false;
@@ -183,6 +184,7 @@ namespace COMDBG
                 statuslabel.Text = "Open failed !";
                 sendbtn.Enabled = false;
                 autoSendcbx.Enabled = false;
+                autoReplyCbx.Enabled = false;
             }
         }
 
@@ -254,6 +256,13 @@ namespace COMDBG
             //update status bar
             receiveBytesCount += e.receivedBytes.Length;
             toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
+
+            //auto reply
+            if (autoReplyCbx.Checked)
+            {
+                sendbtn_Click(this, new EventArgs());
+            }
+
         }
 
         /// <summary>

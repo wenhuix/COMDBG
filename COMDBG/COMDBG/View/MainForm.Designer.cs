@@ -78,6 +78,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.handshakingcbx = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.autoReplyCbx = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -186,6 +187,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.autoReplyCbx);
             this.groupBox1.Controls.Add(this.addCRCcbx);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.sendIntervalTimetbx);
@@ -203,7 +205,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(109, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 368);
+            this.groupBox1.Size = new System.Drawing.Size(367, 385);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
@@ -406,7 +408,7 @@
             this.receivedDataToolStripMenuItem,
             this.sendDataToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // receivedDataToolStripMenuItem
@@ -426,7 +428,7 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -469,7 +471,7 @@
             this.toolStripStatusRx,
             this.toolStripStatusTx,
             this.statusTimeLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 406);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(488, 22);
             this.statusStrip1.TabIndex = 21;
@@ -551,7 +553,7 @@
             this.groupBox2.Controls.Add(this.stopBitsCbx);
             this.groupBox2.Location = new System.Drawing.Point(2, 33);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(103, 368);
+            this.groupBox2.Size = new System.Drawing.Size(103, 385);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "COM";
@@ -573,11 +575,22 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "HandShaking:";
             // 
+            // autoReplyCbx
+            // 
+            this.autoReplyCbx.AutoSize = true;
+            this.autoReplyCbx.Enabled = false;
+            this.autoReplyCbx.Location = new System.Drawing.Point(14, 362);
+            this.autoReplyCbx.Name = "autoReplyCbx";
+            this.autoReplyCbx.Size = new System.Drawing.Size(81, 19);
+            this.autoReplyCbx.TabIndex = 25;
+            this.autoReplyCbx.Text = "AutoReply";
+            this.autoReplyCbx.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 428);
+            this.ClientSize = new System.Drawing.Size(488, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
@@ -652,6 +665,7 @@
         private System.Windows.Forms.ComboBox handshakingcbx;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox addCRCcbx;
+        private System.Windows.Forms.CheckBox autoReplyCbx;
     }
 }
 
