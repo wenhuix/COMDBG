@@ -7,6 +7,7 @@ This tool is C# Serial port debug assistant. It can send and receive data from s
      FF-34-56-90
 3. This application depends on Microsoft .net framework 4.0 client profile. you can download it from [here](http://www.microsoft.com/zh-cn/download/details.aspx?id=24872) if you mechine doesn't installed it.
 4. Visual Studio 2010 project, but can be opened in higher versions.
+
 ### Feature:
 * Automatic find and list avaliable serial port.
 * Send data automatically.
