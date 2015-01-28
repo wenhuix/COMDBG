@@ -1,6 +1,6 @@
 ﻿/**
  
- * Copyright (c) 2014, Wenhuix, All rights reserved.
+ * Copyright (c) 2014-2015, Wenhuix, All rights reserved.
 
  * Redistribution and use in source and binary forms, with or without modification, 
  * are permitted provided that the following conditions are met:
@@ -163,6 +163,7 @@ namespace COMDBG
                 openCloseSpbtn.Text = "Close";
                 sendbtn.Enabled = true;
                 autoSendcbx.Enabled = true;
+                autoReplyCbx.Enabled = true;
 
                 comListCbx.Enabled = false;
                 baudRateCbx.Enabled = false;
@@ -183,6 +184,7 @@ namespace COMDBG
                 statuslabel.Text = "Open failed !";
                 sendbtn.Enabled = false;
                 autoSendcbx.Enabled = false;
+                autoReplyCbx.Enabled = false;
             }
         }
 
@@ -254,6 +256,13 @@ namespace COMDBG
             //update status bar
             receiveBytesCount += e.receivedBytes.Length;
             toolStripStatusRx.Text = "Received: "+receiveBytesCount.ToString();
+
+            //auto reply
+            if (autoReplyCbx.Checked)
+            {
+                sendbtn_Click(this, new EventArgs());
+            }
+
         }
 
         /// <summary>
@@ -381,6 +390,7 @@ namespace COMDBG
             sendtbx.Text = "";
             toolStripStatusTx.Text = "Sent: 0";
             sendBytesCount = 0;
+            addCRCcbx.Checked = false;
         }
 
         /// <summary>
@@ -443,6 +453,7 @@ namespace COMDBG
                     return;
                 }
                 sendtbx.Text = IController.String2Hex(sendtbx.Text);
+                addCRCcbx.Enabled = true;
             }
         }
 
@@ -460,6 +471,7 @@ namespace COMDBG
                     return;
                 }
                 sendtbx.Text = IController.Hex2String(sendtbx.Text);
+                addCRCcbx.Enabled = false;
             }
         }
 
@@ -509,11 +521,11 @@ namespace COMDBG
             if (autoSendcbx.Checked)
             {
                 autoSendtimer.Enabled = true;
-                autoSendtimer.Interval = int.Parse(sendtimetbx.Text);
+                autoSendtimer.Interval = int.Parse(sendIntervalTimetbx.Text);
                 autoSendtimer.Start();
 
                 //disable send botton and textbox
-                sendtimetbx.Enabled = false;
+                sendIntervalTimetbx.Enabled = false;
                 sendtbx.ReadOnly = true;
                 sendbtn.Enabled = false;
             }
@@ -523,7 +535,7 @@ namespace COMDBG
                 autoSendtimer.Stop();
 
                 //enable send botton and textbox
-                sendtimetbx.Enabled = true;
+                sendIntervalTimetbx.Enabled = true;
                 sendtbx.ReadOnly = false;
                 sendbtn.Enabled = true;
             }
@@ -535,11 +547,11 @@ namespace COMDBG
         }
 
         /// <summary>
-        /// filter illegal input
+        /// filter illegal input of auto send interval time
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void sendtimetbx_KeyPress(object sender, KeyPressEventArgs e)
+        private void sendIntervalTimetbx_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar) || e.KeyChar == '\b')
             {
@@ -549,6 +561,38 @@ namespace COMDBG
             {
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// Add CRC checkbox changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addCRCcbx_CheckedChanged(object sender, EventArgs e)
+        {
+            String sendText = sendtbx.Text;
+            if (sendText == null || sendText == "")
+            {
+                addCRCcbx.Checked = false;
+                return;
+            }
+            if (addCRCcbx.Checked)
+            {
+                //Add 2 bytes CRC to the end of the data
+                Byte[] senddata = IController.Hex2Bytes(sendText);
+                Byte[] crcbytes = BitConverter.GetBytes(CRC16.Compute(senddata));
+                sendText += "-" + BitConverter.ToString(crcbytes, 1, 1);
+                sendText += "-" + BitConverter.ToString(crcbytes, 0, 1);
+            }
+            else
+            {
+                //Delete 2 bytes CRC to the end of the data
+                if (sendText.Length >= 6)
+                {
+                    sendText = sendText.Substring(0, sendText.Length - 6);
+                }
+            }
+            sendtbx.Text = sendText;
         }
 
         /// <summary>
@@ -638,6 +682,7 @@ namespace COMDBG
                 help.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
             }
         }
+
 
     }
 }

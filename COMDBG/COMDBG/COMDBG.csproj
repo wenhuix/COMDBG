@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRC16.cs" />
     <Compile Include="View\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
